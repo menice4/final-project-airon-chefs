@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import socket io client
 import io from "socket.io-client";
 
 // Create a socket connection
 const socket = io("http://localhost:5000");
+
 socket.on("connect", () => {
   console.log("Connected to server with id: ", socket.id);
 });
@@ -13,6 +14,21 @@ export default function Chat() {
   const [room, setRoom] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
 
+  // Listen for messages from the server
+  // This isn't good, as listener is being set up every time the chat component renders, causing multiple listeners to be added
+  // We should set up the listener inside a useEffect hook to ensure it only runs once when the component mounts
+  useEffect(() => {
+    socket.on("receive-message", (msg: string) => {
+      console.log("Received message: ", msg);
+      setMessages((prevMessages) => [...prevMessages, msg]);
+    });
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      socket.off("receive-message");
+    };
+  });
+
   // Add a message to the chat
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +37,7 @@ export default function Chat() {
       setMessage("");
 
       // Emit the message to the server
+      // Event name must match on server side and client side. Payload is message state
       socket.emit("message", message);
     }
   };
