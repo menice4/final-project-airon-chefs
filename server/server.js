@@ -30,6 +30,12 @@ const io = require("socket.io")(server, {
 // Socket.io connection, runs every time a client connects to our server, giving a socket instance for each one
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
+  // Listen for a message from the client
+  socket.on("message", (data) => {
+    console.log("Message received on server:", data);
+    // Send the message to all clients
+    io.emit("message", data);
+  });
 });
 
 server.listen(PORT, HOST, () => {

@@ -4,6 +4,9 @@ import io from "socket.io-client";
 
 // Create a socket connection
 const socket = io("http://localhost:5000");
+socket.on("connect", () => {
+  console.log("Connected to server with id: ", socket.id);
+});
 
 export default function Chat() {
   const [message, setMessage] = useState("");
@@ -16,6 +19,9 @@ export default function Chat() {
     if (message.trim()) {
       setMessages((prevMessages) => [...prevMessages, message]);
       setMessage("");
+
+      // Emit the message to the server
+      socket.emit("message", message);
     }
   };
 
