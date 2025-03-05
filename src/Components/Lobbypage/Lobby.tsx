@@ -14,6 +14,8 @@ export default function Lobby() {
   const socket = useSocket();
   const [users, setUsers] = useState<User[]>([]);
   const [room, setRoom] = useState("");
+  // allow users to rename themselves
+  /*  const [userNames, setUserNames] = useState<string>(""); */
 
   useEffect(() => {
     if (!socket) return;
@@ -29,6 +31,12 @@ export default function Lobby() {
     };
   }, [socket]);
 
+  /*   const handleJoinRoom = () => {
+    if (socket && room) {
+      socket.emit("join-room", room);
+    }
+  }; */
+
   // Function to generate a URL to invite users to the room
   const handleGenerateInvite = () => {
     const inviteURL = `${window.location.origin}/join?room=${room}`;
@@ -39,20 +47,21 @@ export default function Lobby() {
   return (
     <div>
       <h1>Lobby</h1>
-      <div>
-        <label htmlFor="room-input">Room:</label>
+      <div className="lobby-container">
+        <label>Room:</label>
         <input
           type="text"
           id="room-input"
           value={room}
           onChange={(e) => setRoom(e.target.value)}
         />
+
         <button onClick={handleGenerateInvite}>Generate Invite URL</button>
       </div>
       <h2>Current Users</h2>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
+          <li key={user.id}>{user.id}</li>
         ))}
       </ul>
     </div>
