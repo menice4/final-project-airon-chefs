@@ -13,7 +13,9 @@ const HOST = `0.0.0.0`;
 
 app.use(
   cors({
-    origin: ["https://final-project-quiz-mania.vercel.app/"],
+    origin: ["https://final-project-quiz-mania.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true,
   })
 );
 app.use(express.json());
@@ -27,7 +29,12 @@ app.get("/api/test", (req, res) => {
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["https://final-project-quiz-mania.vercel.app/"],
+
+
+    origin: ["https://final-project-quiz-mania.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true,
+
   },
 });
 
