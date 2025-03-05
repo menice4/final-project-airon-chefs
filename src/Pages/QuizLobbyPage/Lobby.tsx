@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSocket } from "../../Context/SocketContext.tsx";
-import Chat from "../Chat/ChatInterface.tsx";
+import Chat from "../../Components/Chat/ChatInterface.tsx";
 
 // React router to allow navigation to other pages
 import { useNavigate } from "react-router-dom";
@@ -51,7 +51,7 @@ export default function Lobby() {
 
   // Function to generate a URL to invite users to the room
   const handleGenerateInvite = () => {
-    const inviteURL = `${window.location.origin}`;
+    const inviteURL = `${window.location.origin}/quiz-lobby`;
     navigator.clipboard.writeText(inviteURL);
     alert("Invite link copied to clipboard");
   };

@@ -1,12 +1,24 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function HomePage() {
+export default function HomePage() {
+  const navigate = useNavigate();
+
   return (
-    <div>
-      <h1>Home Page</h1>
-      <Link to="/quiz-lobby">Enter Quiz Lobby</Link>
+    <div className="home-container">
+      <h1>Welcome to the Quiz Game</h1>
+      <p>Choose a mode to get started:</p>
+
+      <div className="button-group">
+        <button onClick={() => navigate("/quiz")} className="btn singleplayer">
+          🎮 Single Player
+        </button>
+        <button
+          onClick={() => navigate("/quiz-lobby")}
+          className="btn multiplayer"
+        >
+          👥 Multiplayer
+        </button>
+      </div>
     </div>
   );
 }
-
-export default HomePage;
