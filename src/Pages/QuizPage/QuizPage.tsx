@@ -15,7 +15,11 @@ export default function QuizPage() {
     async function getData() {
       try {
         const data = await fetchData();
-        setQuestions(data);
+        if (Array.isArray(data)) {
+          setQuestions(data);
+        } else {
+          throw new Error("Data is not an array");
+        }
       } catch (error) {
         setError(error as Error);
       } finally {

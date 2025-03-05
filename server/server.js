@@ -30,7 +30,7 @@ app.get("/api/questions", async (req, res) => {
       "https://opentdb.com/api.php?amount=10&type=multiple"
     );
     const data = await response.json();
-    res.json(data);
+    res.json(data.results);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
