@@ -25,5 +25,9 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"
-  }
+  },
+  "description": "A multiplayer web based quiz website where you can compete on your own or with your friends by answering questions and getting points/",
+  "main": "eslint.config.js",
+  "author": "",
+  "license": "ISC"
 }
