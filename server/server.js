@@ -11,7 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const HOST = `0.0.0.0`;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://final-project-quiz-mania.vercel.app/"],
+  })
+);
 app.use(express.json());
 
 // Test API Route
@@ -23,7 +27,7 @@ app.get("/api/test", (req, res) => {
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: ["https://final-project-quiz-mania.vercel.app/"],
   },
 });
 
