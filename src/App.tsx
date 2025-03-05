@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Lobby from "./Pages/QuizLobbyPage/Lobby";
 import QuizPage from "./Pages/QuizPage/QuizPage";
 import EndPage from "./Pages/EndPage/EndPage";
+
 import HomeScreen from "./Pages/HomePage/HomeScreen";
+
 import LoginPage from "./Pages/LoginPage/LoginPage";
-// serge branch
-/* import Lobby from "./Components/Lobbypage/Lobby"; */
+
 
 function App() {
   return (
