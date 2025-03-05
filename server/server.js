@@ -91,9 +91,6 @@ io.on("connection", (socket) => {
       );
       const data = await response.json();
 
-      // Add more detailed logging
-      console.log("raw api response:", data);
-
       const questions = data.results.map((question) => ({
         ...question,
         shuffledAnswers: shuffleArray([

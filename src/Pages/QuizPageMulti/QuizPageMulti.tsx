@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
-
 import { useSocket } from "../../Context/SocketContext";
 
 type Question = {
@@ -22,47 +21,72 @@ export default function QuizPageMulti() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
 
-  // Ensuring that the socket is connected before fetching data
+  // Use a ref to track if the component is mounted
+  const isMounted = useRef(true);
+
+  // Use a ref to store questions in case they come in before state update
+  const questionsRef = useRef<Question[]>([]);
+
   useEffect(() => {
+    // Set the mounted flag
+    isMounted.current = true;
+
     if (!socket) return;
 
-    console.log("QuizPageMulti: Setting up game-starting listener");
+    console.log("QuizPageMulti: Setting up quiz-questions listener");
 
-    socket.on("quiz-questions", (questionData) => {
-      console.log("QuizPageMulti: quiz-questions event received");
-      console.log("QuizPageMulti: Received questions:", questionData.length);
+    const handleQuestions = (questionData: Question[]) => {
+      console.log("QuizPageMulti: Received quiz-questions event");
+      console.log(
+        "QuizPageMulti: Number of questions received:",
+        questionData.length
+      );
 
-      if (questionData && questionData.length > 0) {
-        setQuestions(questions);
+      // Store in ref
+      questionsRef.current = questionData;
+
+      // Only update state if component is still mounted
+      if (isMounted.current) {
+        setQuestions([...questionData]);
         setLoading(false);
-      } else {
-        console.error("no questions received idiot");
-        setError(new Error("No questions received"));
+        console.log("State updated with questions");
       }
-    });
+    };
+
+    socket.on("quiz-questions", handleQuestions);
+
+    // Check if we already have questions (in case event fired before listener setup)
+    const checkQuestions = setTimeout(() => {
+      if (loading && questionsRef.current.length > 0 && isMounted.current) {
+        console.log("Using cached questions from ref");
+        setQuestions([...questionsRef.current]);
+        setLoading(false);
+      }
+    }, 500);
 
     return () => {
-      socket.off("quiz-questions");
+      isMounted.current = false;
+      clearTimeout(checkQuestions);
+      socket.off("quiz-questions", handleQuestions);
+      console.log("QuizPageMulti: Cleaned up quiz-questions listener");
     };
   }, [socket]);
 
   useEffect(() => {
+    console.log("Questions state has changed, length:", questions.length);
+
     if (questions.length > 0 && currentQuestionIndex < questions.length - 1) {
       const timer = setTimeout(() => {
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       }, 10000); // 10 seconds
 
       return () => clearTimeout(timer);
-    } else {
-      // more debugging
-      console.error("No questions received");
-      setError(new Error("No questions received"));
     }
-  }, [currentQuestionIndex, questions.length]);
+  }, [currentQuestionIndex, questions]);
 
   const decodeHtml = (html: string) => {
     const txt = document.createElement("textarea");
-    txt.innerHTML = html; // is this not a security risk?
+    txt.innerHTML = html;
     return txt.value;
   };
 
@@ -76,42 +100,53 @@ export default function QuizPageMulti() {
     }
   };
 
+  // Extra debugging information
   if (loading) {
-    console.log("still loading");
-    return <div>Loading...</div>;
+    console.log("Still in loading state, questions length:", questions.length);
+    console.log("Questions in ref:", questionsRef.current.length);
+    return <div>Loading quiz questions...</div>;
   }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
+  if (questions.length === 0) {
+    return <div>No questions loaded. Please try again.</div>;
+  }
+
   const currentQuestion = questions[currentQuestionIndex];
+
+  console.log("Rendering quiz. Current question index:", currentQuestionIndex);
+  console.log("Current question:", currentQuestion);
+
+  if (!currentQuestion) {
+    return <div>Question data is invalid. Please restart the quiz.</div>;
+  }
 
   return (
     <div>
       <h1>Welcome to the Quiz</h1>
       <p>Score: {score}</p>
-      {currentQuestion && (
-        <div>
-          <p>
-            {currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}
-          </p>
-          <ul>
-            {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
-              <li key={answerIndex}>
-                <QuizAnswer
-                  answer={decodeHtml(answer)}
-                  onClick={(answer) =>
-                    handleAnswerClick(currentQuestionIndex, answer)
-                  }
-                  isSelected={selectedAnswers[currentQuestionIndex] === answer}
-                  isCorrect={answer === currentQuestion.correct_answer}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div>
+        <p>
+          {currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}
+        </p>
+        <ul>
+          {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
+            <li key={answerIndex}>
+              <QuizAnswer
+                answer={decodeHtml(answer)}
+                onClick={(answer) =>
+                  handleAnswerClick(currentQuestionIndex, answer)
+                }
+                isSelected={selectedAnswers[currentQuestionIndex] === answer}
+                isCorrect={answer === currentQuestion.correct_answer}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
       {currentQuestionIndex === questions.length - 1 && (
         <Link to="/end">Finish</Link>
       )}
