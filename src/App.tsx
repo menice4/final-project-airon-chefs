@@ -9,7 +9,6 @@ import HomeScreen from "./Pages/HomePage/HomeScreen";
 
 import LoginPage from "./Pages/LoginPage/LoginPage";
 
-
 function App() {
   return (
     <Router>
