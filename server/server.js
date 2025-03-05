@@ -1,5 +1,7 @@
-// load environment variables
-require("dotenv").config();
+// socket IO allows us to set up web sockets
+// these connect to the sever, and leaves the connection to the server open
+// this allows for real time communication between the server and the client
+
 // load server
 const express = require("express");
 // load cors
@@ -17,6 +19,25 @@ app.get("/api/test", (req, res) => {
   res.json({ message: "Backend is working!" });
 });
 
-app.listen(PORT, HOST, () => {
+// Create HTTP server and intergrate socket.io
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:5173"],
+  },
+});
+
+// Socket.io connection, runs every time a client connects to our server, giving a socket instance for each one
+io.on("connection", (socket) => {
+  console.log("New client connected:", socket.id);
+  // Listen for a message from the client
+  socket.on("message", (data) => {
+    console.log("Message received on server:", data);
+    // Send the message to all clients
+    socket.broadcast.emit("receive-message", data);
+  });
+});
+
+server.listen(PORT, HOST, () => {
   console.log(`Server running on http://${HOST}:${PORT}`);
 });
