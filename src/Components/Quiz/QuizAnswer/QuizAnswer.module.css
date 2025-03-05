@@ -1,0 +1,14 @@
+.button {
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  
+  .correct {
+    border-color: green;
+  }
+  
+  .incorrect {
+    border-color: red;
+  }
