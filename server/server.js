@@ -11,7 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const HOST = `0.0.0.0`;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://final-project-quiz-mania.vercel.app/"],
+  })
+);
 app.use(express.json());
 
 // Test API Route
