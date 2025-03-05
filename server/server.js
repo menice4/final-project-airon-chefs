@@ -90,6 +90,10 @@ io.on("connection", (socket) => {
         "https://opentdb.com/api.php?amount=10&type=multiple"
       );
       const data = await response.json();
+
+      // Add more detailed logging
+      console.log("raw api response:", data);
+
       const questions = data.results.map((question) => ({
         ...question,
         shuffledAnswers: shuffleArray([
@@ -97,7 +101,14 @@ io.on("connection", (socket) => {
           ...question.incorrect_answers,
         ]),
       }));
-      io.emit("start-game", questions);
+
+      console.log("Processed Questions:", questions);
+
+      // Log number of questions
+      console.log("Number of Questions:", questions.length);
+
+      // emit to all clients that the game is starting with questions
+      io.emit("game-starting", questions);
     } catch (error) {
       console.error("Error fetching quiz data:", error);
     }

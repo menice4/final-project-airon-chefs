@@ -26,14 +26,14 @@ export default function QuizPageMulti() {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("start-game", (questions: Question[]) => {
+    socket.on("game-starting", (questions: Question[]) => {
       console.log("game started with questions: ", questions);
       setQuestions(questions);
       setLoading(false);
     });
 
     return () => {
-      socket.off("start-game");
+      socket.off("game-starting");
     };
   }, [socket]);
 

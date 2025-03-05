@@ -31,14 +31,14 @@ export default function Lobby() {
     });
 
     // Listens for the start game event
-    socket.on("start-game", () => {
+    socket.on("game-starting", () => {
       navigate("/quiz-multi");
     });
 
     // Clean up the listener when the component unmounts
     return () => {
       socket.off("users");
-      socket.off("start-game");
+      socket.off("game-starting");
     };
   }, [socket, navigate]);
 
