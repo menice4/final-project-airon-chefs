@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { useSocket } from "../../Context/SocketContext.tsx";
 import Chat from "../Chat/ChatInterface.tsx";
 
+// React router to allow navigation to other pages
+import { useNavigate } from "react-router-dom";
+
 interface User {
   id: string;
   name: string;
@@ -12,6 +15,7 @@ interface User {
 // function to create the lobby component
 export default function Lobby() {
   const socket = useSocket();
+  const navigate = useNavigate();
   const [users, setUsers] = useState<User[]>([]);
   // allow users to rename themselves
   const [userNames, setUserNames] = useState<string>("");
@@ -24,6 +28,11 @@ export default function Lobby() {
     // Listen for updates to the user list
     socket.on("update-users", (users: User[]) => {
       setUsers(users);
+    });
+
+    // Listens for the start game event
+    socket.on("start-game", () => {
+      navigate("/game");
     });
 
     // Clean up the listener when the component unmounts
