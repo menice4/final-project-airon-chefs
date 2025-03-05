@@ -13,7 +13,12 @@ const HOST = `0.0.0.0`;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+
+    origin: [
+      "https://final-project-quiz-mania.vercel.app",
+      "http://localhost:5173",
+    ],
+
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -21,8 +26,17 @@ app.use(
 app.use(express.json());
 
 // Test API Route
-app.get("/api/test", (req, res) => {
-  res.json({ message: "Backend is working!" });
+app.get("/api/questions", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://opentdb.com/api.php?amount=10&type=multiple"
+    );
+    const data = await response.json();
+    res.json(data.results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
 // TRACKS USERS GLOBALLY AND SEND UPDATES
@@ -32,7 +46,10 @@ const users = {};
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+
+    origin: ["http://localhost:5173",
+    "https://final-project-quiz-mania.vercel.app"],
+
     methods: ["GET", "POST"],
     credentials: true,
   },
