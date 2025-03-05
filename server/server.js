@@ -13,7 +13,10 @@ const HOST = `0.0.0.0`;
 
 app.use(
   cors({
-    origin: ["https://final-project-quiz-mania.vercel.app"],
+    origin: [
+      "https://final-project-quiz-mania.vercel.app",
+      "http://localhost:5173",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   })
