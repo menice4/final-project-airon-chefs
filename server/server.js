@@ -102,13 +102,17 @@ io.on("connection", (socket) => {
         ]),
       }));
 
-      console.log("Processed Questions:", questions);
-
       // Log number of questions
       console.log("Number of Questions:", questions.length);
 
-      // emit to all clients that the game is starting with questions
-      io.emit("game-starting", questions);
+      // send notification to navigate to quiz page
+      io.emit("navigate-to-quiz");
+
+      // send questions data in a separate event
+      setTimeout(() => {
+        io.emit("quiz-questions", questions);
+        console.log("emitted quiz-questions event");
+      }, 500); // small delay to ensure navigation happens first
     } catch (error) {
       console.error("Error fetching quiz data:", error);
     }

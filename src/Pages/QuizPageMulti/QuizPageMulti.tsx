@@ -26,14 +26,23 @@ export default function QuizPageMulti() {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("game-starting", (questions: Question[]) => {
-      console.log("game started with questions: ", questions);
-      setQuestions(questions);
-      setLoading(false);
+    console.log("QuizPageMulti: Setting up game-starting listener");
+
+    socket.on("quiz-questions", (questionData) => {
+      console.log("QuizPageMulti: quiz-questions event received");
+      console.log("QuizPageMulti: Received questions:", questionData.length);
+
+      if (questionData && questionData.length > 0) {
+        setQuestions(questions);
+        setLoading(false);
+      } else {
+        console.error("no questions received idiot");
+        setError(new Error("No questions received"));
+      }
     });
 
     return () => {
-      socket.off("game-starting");
+      socket.off("quiz-questions");
     };
   }, [socket]);
 
@@ -44,6 +53,10 @@ export default function QuizPageMulti() {
       }, 10000); // 10 seconds
 
       return () => clearTimeout(timer);
+    } else {
+      // more debugging
+      console.error("No questions received");
+      setError(new Error("No questions received"));
     }
   }, [currentQuestionIndex, questions.length]);
 
@@ -64,6 +77,7 @@ export default function QuizPageMulti() {
   };
 
   if (loading) {
+    console.log("still loading");
     return <div>Loading...</div>;
   }
 
