@@ -16,6 +16,7 @@ export default function QuizPage() {
   const [error, setError] = useState<Error | null>(null);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     async function getData() {
@@ -67,6 +68,9 @@ export default function QuizPage() {
       return;
     }
     setSelectedAnswers((prev) => ({ ...prev, [questionIndex]: answer }));
+    if (answer === questions[questionIndex].correct_answer) {
+      setScore((prevScore) => prevScore + 1);
+    }
   };
 
   if (loading) {
@@ -82,6 +86,7 @@ export default function QuizPage() {
   return (
     <div>
       <h1>Welcome to the Quiz</h1>
+      <p>Score: {score}</p>
       {currentQuestion && (
         <div>
           <p>{currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}</p>
