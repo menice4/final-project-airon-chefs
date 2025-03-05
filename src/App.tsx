@@ -1,10 +1,12 @@
 import "./App.css";
-import Chat from "./Components/Chat/ChatInterface";
+/* import Chat from "./Components/Chat/ChatInterface"; */
+import Lobby from "./Components/Lobbypage/Lobby";
 
 function App() {
   return (
     <div>
-      <Chat />
+      <h1>Socket.IO Chat App</h1>
+      <Lobby />
     </div>
   );
 }
