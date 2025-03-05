@@ -32,14 +32,15 @@ export default function Lobby() {
 
     // Listens for the start game event
     socket.on("start-game", () => {
-      navigate("/game");
+      navigate("/quiz-multi");
     });
 
     // Clean up the listener when the component unmounts
     return () => {
       socket.off("users");
+      socket.off("start-game");
     };
-  }, [socket]);
+  }, [socket, navigate]);
 
   // function to allow users to rename
   const handleRename = () => {
@@ -54,6 +55,13 @@ export default function Lobby() {
     const inviteURL = `${window.location.origin}/quiz-lobby`;
     navigator.clipboard.writeText(inviteURL);
     alert("Invite link copied to clipboard");
+  };
+
+  // start the game
+  const handleStartGame = () => {
+    if (socket) {
+      socket.emit("start-game");
+    }
   };
 
   return (
@@ -75,6 +83,7 @@ export default function Lobby() {
         <div>
           <div className="lobby-container">
             <button onClick={handleGenerateInvite}>Generate Invite URL</button>
+            <button onClick={handleStartGame}>Start Game</button>
           </div>
           <h2>Current Users</h2>
           <ul>

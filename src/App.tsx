@@ -9,6 +9,9 @@ import HomeScreen from "./Pages/HomePage/HomeScreen";
 
 import LoginPage from "./Pages/LoginPage/LoginPage";
 
+// multiplayer import
+import QuizPageMulti from "./Pages/QuizPageMulti/QuizPageMulti";
+
 function App() {
   return (
     <Router>
@@ -17,6 +20,7 @@ function App() {
         <Route path="/home" element={<HomeScreen />} />
         <Route path="/quiz-lobby" element={<Lobby />} />
         <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/quiz-multi" element={<QuizPageMulti />} />
         <Route path="/end" element={<EndPage />} />
       </Routes>
     </Router>
