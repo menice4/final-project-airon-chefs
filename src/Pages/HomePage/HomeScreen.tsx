@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function HomePage() {
+export default function HomeScreen() {
   const navigate = useNavigate();
 
   return (
