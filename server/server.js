@@ -21,20 +21,26 @@ app.use(
 app.use(express.json());
 
 // Test API Route
-app.get("/api/test", (req, res) => {
-  res.json({ message: "Backend is working!" });
+app.get("/api/questions", async (req, res) => {
+  try {
+    const response = await fetch(
+      "https://opentdb.com/api.php?amount=10&type=multiple"
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
 // Create HTTP server and intergrate socket.io
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-
-
     origin: ["https://final-project-quiz-mania.vercel.app"],
     methods: ["GET", "POST"],
     credentials: true,
-
   },
 });
 
