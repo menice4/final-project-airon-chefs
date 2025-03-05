@@ -43,7 +43,7 @@ io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
 
   // Add a new user to the users object when connected
-  users[socket.id] = { id: socket.id };
+  users[socket.id] = { id: socket.id, name: "" };
 
   // Send updated user list to all clients
   io.emit("update-users", Object.values(users));
@@ -55,14 +55,12 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("receive-message", data);
   });
 
-  // Listens for users joining a room
-  socket.on("join-room", (room) => {
-    socket.join(room);
-    if (!users[room]) {
-      users[room] = [];
+  // listen for users setting their username
+  socket.on("rename-user", (newName) => {
+    if (users[socket.id]) {
+      users[socket.id].name = newName;
+      io.emit("update-users", Object.values(users));
     }
-    users[room].push({ id: socket.id });
-    io.to(room).emit("update-users", users[room]);
   });
 
   // HANDLE USERS DISCONNECTING

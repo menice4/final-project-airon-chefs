@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSocket } from "../../Context/SocketContext.tsx";
+import Chat from "../Chat/ChatInterface.tsx";
 
 interface User {
   id: string;
@@ -9,13 +10,13 @@ interface User {
 }
 
 // function to create the lobby component
-
 export default function Lobby() {
   const socket = useSocket();
   const [users, setUsers] = useState<User[]>([]);
-  const [room, setRoom] = useState("");
   // allow users to rename themselves
-  /*  const [userNames, setUserNames] = useState<string>(""); */
+  const [userNames, setUserNames] = useState<string>("");
+  // check if username is set
+  const [isUserNameSet, setIsUserNameSet] = useState<boolean>(false);
 
   useEffect(() => {
     if (!socket) return;
@@ -31,39 +32,50 @@ export default function Lobby() {
     };
   }, [socket]);
 
-  /*   const handleJoinRoom = () => {
-    if (socket && room) {
-      socket.emit("join-room", room);
+  // function to allow users to rename
+  const handleRename = () => {
+    if (userNames.trim() && socket) {
+      socket.emit("rename-user", userNames);
+      setIsUserNameSet(true);
     }
-  }; */
+  };
 
   // Function to generate a URL to invite users to the room
   const handleGenerateInvite = () => {
-    const inviteURL = `${window.location.origin}/join?room=${room}`;
+    const inviteURL = `${window.location.origin}`;
     navigator.clipboard.writeText(inviteURL);
-    alert("Invite URL copied to clipboard");
+    alert("Invite link copied to clipboard");
   };
 
   return (
     <div>
+      {/* ternary operator conditionally rendering a different UI based on whether a new user has set their name or not */}
       <h1>Lobby</h1>
-      <div className="lobby-container">
-        <label>Room:</label>
-        <input
-          type="text"
-          id="room-input"
-          value={room}
-          onChange={(e) => setRoom(e.target.value)}
-        />
-
-        <button onClick={handleGenerateInvite}>Generate Invite URL</button>
-      </div>
-      <h2>Current Users</h2>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>{user.id}</li>
-        ))}
-      </ul>
+      {!isUserNameSet ? (
+        <div>
+          <label htmlFor="name-input">Enter your name:</label>
+          <input
+            type="text"
+            id="name-input"
+            value={userNames}
+            onChange={(e) => setUserNames(e.target.value)}
+          />
+          <button onClick={handleRename}>Set Name</button>
+        </div>
+      ) : (
+        <div>
+          <div className="lobby-container">
+            <button onClick={handleGenerateInvite}>Generate Invite URL</button>
+          </div>
+          <h2>Current Users</h2>
+          <ul>
+            {users.map((user) => (
+              <li key={user.id}>{user.name}</li>
+            ))}
+          </ul>
+          <Chat />
+        </div>
+      )}
     </div>
   );
 }

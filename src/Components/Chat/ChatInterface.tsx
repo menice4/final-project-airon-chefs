@@ -12,7 +12,6 @@ export default function Chat() {
   // Get the socket connection from the context
   const socket = useSocket();
   const [message, setMessage] = useState("");
-  const [room, setRoom] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
 
   // Listen for messages from the server
@@ -46,11 +45,6 @@ export default function Chat() {
     }
   };
 
-  // Join a chat room
-  const handleJoinRoom = () => {
-    console.log("Joining room: ", room);
-  };
-
   return (
     <div className="chat-container">
       <form onSubmit={handleSendMessage} className="chat-form">
@@ -63,16 +57,6 @@ export default function Chat() {
         />
         <button type="submit" id="send-button">
           Send
-        </button>
-        <label htmlFor="room-input">Room</label>
-        <input
-          type="text"
-          id="room-input"
-          value={room}
-          onChange={(e) => setRoom(e.target.value)}
-        />
-        <button type="button" id="room-button" onClick={handleJoinRoom}>
-          Join
         </button>
       </form>
       <div className="chatbox">
