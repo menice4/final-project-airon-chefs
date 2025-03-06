@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./Clock.module.css";
+import "./Clock.css";
 
 interface ClockProps {
   duration: number;
