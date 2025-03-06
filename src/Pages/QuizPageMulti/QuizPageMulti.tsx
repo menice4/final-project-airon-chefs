@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
+import Clock from "../../Components/Clock/Clock";
 import { useSocket } from "../../Context/SocketContext";
 
 // import the scoreboard
@@ -22,6 +23,7 @@ export default function QuizPageMulti() {
   }>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const navigate = useNavigate();
 
   // Use a ref to track if the component is mounted
   const isMounted = useRef(true);
@@ -77,18 +79,6 @@ export default function QuizPageMulti() {
     };
   }, [socket, loading]);
 
-  useEffect(() => {
-    console.log("Questions state has changed, length:", questions.length);
-
-    if (questions.length > 0 && currentQuestionIndex < questions.length - 1) {
-      const timer = setTimeout(() => {
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      }, 10000); // 10 seconds
-
-      return () => clearTimeout(timer);
-    }
-  }, [currentQuestionIndex, questions]);
-
   const decodeHtml = (html: string) => {
     const txt = document.createElement("textarea");
     txt.innerHTML = html;
@@ -116,6 +106,14 @@ export default function QuizPageMulti() {
       isCorrect,
       questionIndex,
     });
+  };
+
+  const handleTimerComplete = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      navigate("/end");
+    }
   };
 
   // Extra debugging information
@@ -147,17 +145,14 @@ export default function QuizPageMulti() {
       <h1>Welcome to the Quiz</h1>
       <p>Score: {score}</p>
       <div>
-        <p>
-          {currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}
-        </p>
+        <Clock key={currentQuestionIndex} duration={10} onComplete={handleTimerComplete} />
+        <p>{currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}</p>
         <ul>
           {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
             <li key={answerIndex}>
               <QuizAnswer
                 answer={decodeHtml(answer)}
-                onClick={(answer) =>
-                  handleAnswerClick(currentQuestionIndex, answer)
-                }
+                onClick={(answer) => handleAnswerClick(currentQuestionIndex, answer)}
                 isSelected={selectedAnswers[currentQuestionIndex] === answer}
                 isCorrect={answer === currentQuestion.correct_answer}
               />
@@ -165,6 +160,7 @@ export default function QuizPageMulti() {
           ))}
         </ul>
       </div>
+
       {currentQuestionIndex === questions.length - 1 && (
         <Link to="/end">Finish</Link>
       )}

@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import fetchData from "./fetchData";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
+import Clock from "../../Components/Clock/Clock";
 
 type Question = {
   question: string;
@@ -17,6 +18,7 @@ export default function QuizPage() {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getData() {
@@ -43,16 +45,6 @@ export default function QuizPage() {
     getData();
   }, []);
 
-  useEffect(() => {
-    if (questions.length > 0 && currentQuestionIndex < questions.length - 1) {
-      const timer = setTimeout(() => {
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      }, 10000); // 10 seconds
-
-      return () => clearTimeout(timer);
-    }
-  }, [currentQuestionIndex, questions.length]);
-
   const decodeHtml = (html: string) => {
     const txt = document.createElement("textarea");
     txt.innerHTML = html;
@@ -73,6 +65,14 @@ export default function QuizPage() {
     }
   };
 
+  const handleTimerComplete = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      navigate("/end");
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -89,6 +89,7 @@ export default function QuizPage() {
       <p>Score: {score}</p>
       {currentQuestion && (
         <div>
+          <Clock key={currentQuestionIndex} duration={10} onComplete={handleTimerComplete} />
           <p>{currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}</p>
           <ul>
             {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
@@ -103,9 +104,6 @@ export default function QuizPage() {
             ))}
           </ul>
         </div>
-      )}
-      {currentQuestionIndex === questions.length - 1 && (
-        <Link to="/end">Finish</Link>
       )}
     </div>
   );
