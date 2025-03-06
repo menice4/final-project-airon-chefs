@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Timer.module.css';
+import './Clock.module.css';
 
 type TimerProps = {
   duration: number;
