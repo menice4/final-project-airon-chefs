@@ -19,6 +19,8 @@ function App() {
 
   const { session } = authContext;
 
+  
+
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
