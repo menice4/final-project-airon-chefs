@@ -70,13 +70,14 @@ export default function QuizPage() {
     setIsBufferTime(true);
     setTimeout(() => {
       setIsBufferTime(false);
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    } else {
-      navigate("/end");
-    }
-  }, 5000);
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      } else {
+        navigate("/end");
+      }
+    }, 5000);
   };
+  
   if (loading) {
     return <div>Loading...</div>;
   }
