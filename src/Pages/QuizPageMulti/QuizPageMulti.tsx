@@ -14,7 +14,6 @@ export default function QuizPageMulti() {
   const socket = useSocket();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
   const [selectedAnswers, setSelectedAnswers] = useState<{
     [key: number]: string;
   }>({});
@@ -54,6 +53,9 @@ export default function QuizPageMulti() {
     };
 
     socket.on("quiz-questions", handleQuestions);
+    // problem is that previously, this socket could emit a "quiz-questions" event before the event listener was attached due to a delay in rendering
+    // this would miss the component entirely, adn the questions would not be displayed
+    // this is why we use a ref to store the questions and check if they exist before setting the state (isMounted)
 
     // Check if we already have questions (in case event fired before listener setup)
     const checkQuestions = setTimeout(() => {
@@ -70,7 +72,7 @@ export default function QuizPageMulti() {
       socket.off("quiz-questions", handleQuestions);
       console.log("QuizPageMulti: Cleaned up quiz-questions listener");
     };
-  }, [socket]);
+  }, [socket, loading]);
 
   useEffect(() => {
     console.log("Questions state has changed, length:", questions.length);
@@ -107,9 +109,9 @@ export default function QuizPageMulti() {
     return <div>Loading quiz questions...</div>;
   }
 
-  if (error) {
+  /*   if (error) {
     return <div>Error: {error.message}</div>;
-  }
+  } */
 
   if (questions.length === 0) {
     return <div>No questions loaded. Please try again.</div>;
