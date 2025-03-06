@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     );
 
-    // Cleanup subscription on unmount
+    // Cleanup` subscription on unmount
     return () => {
       subscription.unsubscribe();
     };
