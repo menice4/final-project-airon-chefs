@@ -163,12 +163,13 @@ export default function QuizPageMulti() {
             <li key={answerIndex}>
               <QuizAnswer
                 answer={decodeHtml(answer)}
-                onClick={(answer) =>
+                onClick={(answer: string) =>
                   handleAnswerClick(currentQuestionIndex, answer)
                 }
                 isSelected={selectedAnswers[currentQuestionIndex] === answer}
                 isCorrect={answer === currentQuestion.correct_answer}
                 isBufferTime={isBufferTime} // Pass the buffer time state
+                correctAnswer={currentQuestion.correct_answer} // Pass the correct answer
               />
             </li>
           ))}
