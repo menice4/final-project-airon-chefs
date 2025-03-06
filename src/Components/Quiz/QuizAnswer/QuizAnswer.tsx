@@ -14,17 +14,16 @@ const QuizAnswer: React.FC<QuizAnswerProps> = ({ answer, onClick, isSelected, is
 
   useEffect(() => {
     setHasSelected(false);
-  }, [answer]);
+  }, []);
 
   const handleClick = () => {
     if (!isBufferTime) { 
-    setHasSelected(true);
-    onClick(answer);
+      setHasSelected(true);
+      onClick(answer);
     }
   };
 
-  const buttonClass = `${styles.button} ${isSelected ? styles.selected : ''} ${isBufferTime && hasSelected && isCorrect ? styles.correct : ''} ${isBufferTime && hasSelected && !isCorrect ? styles.incorrect : ''}`;
-
+  const buttonClass = `${styles.button} ${isSelected ? styles.selected : ''} ${isBufferTime && isCorrect ? styles.correct : ''} ${isBufferTime && hasSelected && !isCorrect ? styles.incorrect : ''}`;
 
   return (
     <button onClick={handleClick} className={buttonClass} disabled={isBufferTime}>
