@@ -41,6 +41,9 @@ app.get("/api/questions", async (req, res) => {
 // TRACKS USERS GLOBALLY AND SEND UPDATES
 const users = {};
 
+// TRACK USER SCORES GLOBALLY AND SEND UPDATES
+const userScores = {};
+
 // Create HTTP server and intergrate socket.io
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
@@ -115,6 +118,45 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Listens for answers being submitted to update scores
+  socket.on("submit-answer", (data) => {
+    const { isCorret, questionIndex } = data;
+
+    // Initialize score if first answer from this user
+    if (!userScores[socket.id]) {
+      userScores[socket.id] = 0;
+    }
+
+    // update score if answer is correct
+    if (isCorret) {
+      userScores[socket.id] += 1;
+    }
+
+    // broadcast updated scoreboard to all clients, helper function below
+    broadcastScoreboard();
+  });
+
+  // Helper function to broadcast updated scoreboard to all clients
+  function broadcastScoreboard() {
+    // create array of users with scores, sorted by score (highest first)
+
+    const scoreboard = Object.values(users)
+      .map((user) => ({
+        id: user.id,
+        name: user.name || `Player ${user.id.substring(0, 4)}`,
+        score: user.score || 0,
+      }))
+      .sort((a, b) => b.score - a.score);
+
+    // add rank property
+    scoreboard.forEach((user, index) => {
+      user.rank = index + 1;
+    });
+
+    // finally broadcast scoreboard to all clients
+    io.emit("scoreboard-update", scoreboard);
+  }
+
   // Shuffle the answers for the questions
   function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
@@ -125,8 +167,12 @@ io.on("connection", (socket) => {
     console.log("Client disconnected:", socket.id);
     // remove the user
     delete users[socket.id];
+    // also remove user scores
+    delete userScores[socket.id];
     // send updated user list to all clients
     io.emit("update-users", Object.values(users));
+    // and update the scoreboard upon disconnect too
+    broadcastScoreboard();
   });
 });
 
