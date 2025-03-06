@@ -1,3 +1,4 @@
+/* ScoreBoard.css */
 .scoreboard-container {
   background-color: #f5f5f5;
   border-radius: 8px;
@@ -15,28 +16,31 @@
   border-bottom: 1px solid #ddd;
 }
 
-.scoreboard-header {
+/* Apply the same grid structure to both header and rows */
+.scoreboard-header,
+.scoreboard-body > div {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   padding: 8px 0;
+  text-align: left;
+}
+
+.scoreboard-header {
   font-weight: bold;
   color: #666;
   border-bottom: 1px solid #ddd;
 }
 
-.scoreboard-row {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  padding: 8px 0;
+.scoreboard-body > div {
   border-bottom: 1px solid #eee;
   transition: background-color 0.3s ease;
 }
 
-.scoreboard-row:last-child {
+.scoreboard-body > div:last-child {
   border-bottom: none;
 }
 
-.scoreboard-row.current-player {
+.scoreboard-body > div.current-player {
   background-color: rgba(70, 130, 180, 0.1);
   font-weight: bold;
 }
@@ -45,7 +49,7 @@
   text-align: center;
 }
 
-.name {
+.player {
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -61,21 +65,4 @@
   text-align: center;
   padding: 20px;
   color: #999;
-}
-
-/* Animation for score changes */
-@keyframes score-change {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.score-change {
-  animation: score-change 0.5s ease;
 }
