@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
 import Clock from "../../Components/Clock/Clock";
-import { useSocket } from "../../Context/SocketContext";
+import { useSocket } from "../../context/SocketContext";
 
 // import the scoreboard
 import Scoreboard from "../../Components/ScoreBoard/ScoreBoard";
@@ -18,7 +18,9 @@ export default function QuizPageMulti() {
   const socket = useSocket();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
+  const [selectedAnswers, setSelectedAnswers] = useState<{
+    [key: number]: string;
+  }>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isBufferTime, setIsBufferTime] = useState(false); // Added state for buffer time

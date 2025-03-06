@@ -1,7 +1,7 @@
 // Create the lobby page where users can see the current users in a room. The host should be able to generate a URL to invite other users to join the room
 
 import { useEffect, useState } from "react";
-import { useSocket } from "../../Context/SocketContext.tsx";
+import { useSocket } from "../../context/SocketContext.tsx";
 import Chat from "../../Components/Chat/ChatInterface.tsx";
 
 // React router to allow navigation to other pages

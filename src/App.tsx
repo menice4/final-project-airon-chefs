@@ -7,7 +7,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import QuizPageMulti from "./Pages/QuizPageMulti/QuizPageMulti";
 
-import { AuthContext } from "./Context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 
 function App() {
