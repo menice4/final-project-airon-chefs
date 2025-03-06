@@ -1,0 +1,285 @@
+[33mcommit 0efb46572d99a60d21ad81353df63745f8d7c48e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mjj-branch[m[33m)[m
+Author: Jackafella1 <jackafella@gmail.com>
+Date:   Thu Mar 6 10:28:28 2025 +0000
+
+    Revert "google login working github needs works"
+    
+    This reverts commit bbad3af8a312a1b9b7c23bedb4fb1bdef51bbff3.
+
+[33mcommit bbad3af8a312a1b9b7c23bedb4fb1bdef51bbff3[m[33m ([m[1;31morigin/jj-branch[m[33m)[m
+Author: Jackafella1 <jackafella@gmail.com>
+Date:   Wed Mar 5 17:22:04 2025 +0000
+
+    google login working github needs works
+
+[33mcommit 84c5b260e0605004c2d9536c07c2e3201dd05717[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Jacob Smith <183931179+SmithyJ98@users.noreply.github.com>
+Date:   Wed Mar 5 15:40:03 2025 +0000
+
+    only geting the results arrray from the fetch
+
+[33mcommit 1f33f0e01de8debda834c951c7c823495932deea[m
+Merge: da662e6 6a9ebdf
+Author: Jacob Smith <183931179+SmithyJ98@users.noreply.github.com>
+Date:   Wed Mar 5 14:47:30 2025 +0000
+
+    Merge pull request #29 from SchoolOfCode/4-pass-data-to-frontend-and-render
+    
+    Testing to render on front end, added my local host to cors
+
+[33mcommit 6a9ebdfbb8cbead85d9732f8ba74fd6131d1891f[m[33m ([m[1;31morigin/4-pass-data-to-frontend-and-render[m[33m)[m
+Author: Jacob Smith <183931179+SmithyJ98@users.noreply.github.com>
+Date:   Wed Mar 5 14:43:57 2025 +0000
+
+    Testing to render on front end, added my local host to cors
+
+[33mcommit da662e6e3333222d33c9aa0fcd5709152e61501f[m
+Merge: f6eed7b 962bea8
+Author: Jacob Smith <183931179+SmithyJ98@users.noreply.github.com>
+Date:   Wed Mar 5 14:23:19 2025 +0000
+
+    Merge pull request #28 from SchoolOfCode/3-api-response-backend
+    
+    Setup backend api call response
+
+[33mcommit 962bea8e128f2a9f0a9c296605ceb3dd2773823f[m[33m ([m[1;31morigin/3-api-response-backend[m[33m)[m
+Author: Jacob Smith <183931179+SmithyJ98@users.noreply.github.com>
+Date:   Wed Mar 5 14:21:29 2025 +0000
+
+    Setup backend api call response
+
+[33mcommit f6eed7b074860b8ca415bf51000e66a1d5592dd2[m
+Merge: e89333e b4dc0de
+Author: Timothy Li <Timothy93li@gmail.com>
+Date:   Wed Mar 5 13:35:28 2025 +0000
+
+    Merge pull request #26 from SchoolOfCode/pages-setup
+    
+    Pages setup
+
+[33mcommit b4dc0de0e89095d64132e9b0a553f90adaa7bdca[m[33m ([m[1;31morigin/pages-setup[m[33m)[m
+Merge: 207d3ff e89333e
+Author: Timothy Li <Timothy93li@gmail.com>
+Date:   Wed Mar 5 13:34:59 2025 +0000
+
+    Merge branch 'main' into pages-setup
+
+[33mcommit 207d3ff3ffd9e361acb5534f4935489a10d7aabb[m
+Author: Timothy Li <timothy93li@gmail.com>
+Date:   Wed Mar 5 13:29:49 2025 +0000
+
+    pages set up with routing
+
+[33mcommit e89333e21b22b278d5ecc449bb3c9e8c9caf809a[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 12:31:23 2025 +0000
+
+    build should work now
+
+[33mcommit ce9b7bcd9eb4753be86c5dd03211721e1b128b80[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 12:29:54 2025 +0000
+
+    renamed chat
+
+[33mcommit a17053d9520419634676ed1c09a8e8d509cd966c[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 12:22:56 2025 +0000
+
+    chat errors again
+
+[33mcommit 2d8a5ffa91bbe1e60cb9ea2c3b5465ca9db93b89[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 12:21:32 2025 +0000
+
+    fixing ashton commit
+
+[33mcommit aff58070f570fe9ca2dd0d97ae3dce333bbbaf97[m
+Merge: 660064d eff7fe8
+Author: Sergio <160177423+skudz96@users.noreply.github.com>
+Date:   Wed Mar 5 12:17:44 2025 +0000
+
+    Merge pull request #25 from SchoolOfCode/ashton
+    
+    Ashton created API call
+
+[33mcommit eff7fe8fa69cd7085262bfd1cc74a0264d6d8d18[m
+Merge: 575c801 660064d
+Author: Sergio <160177423+skudz96@users.noreply.github.com>
+Date:   Wed Mar 5 12:17:33 2025 +0000
+
+    Merge branch 'main' into ashton
+
+[33mcommit 575c80182113d36bd00e92236ab36ffa3663e878[m
+Author: Ashton Bailey <95630289+menice4@users.noreply.github.com>
+Date:   Wed Mar 5 12:15:58 2025 +0000
+
+    created API call
+
+[33mcommit 660064da7d83b1d4acb6cff3ccb224072aaee24b[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 12:12:05 2025 +0000
+
+    more socket fixing
+
+[33mcommit d1cf87faab757224f16d2cdaad463c86d6967576[m
+Merge: e117f88 a37c0dc
+Author: Timothy Li <timothy93li@gmail.com>
+Date:   Wed Mar 5 12:05:44 2025 +0000
+
+    Merge branch 'main' of https://github.com/SchoolOfCode/final-project-airon-chefs
+
+[33mcommit a37c0dcdc3783fd57a1f277352e531eaddd7ac6f[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 12:04:45 2025 +0000
+
+    cors origin to deployed link
+
+[33mcommit 20b64bba4bf1efe105ea27184eb3a9c91e66c39e[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 12:00:11 2025 +0000
+
+    using delpoyed front and back rather than localhost, ticket #20
+
+[33mcommit 2a83d1dba0a0bcaa13489a538c606ee2dcaa093f[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 11:34:30 2025 +0000
+
+    fixed chat component
+
+[33mcommit 965c212c1ef1fdef8f9e563191e4a6dcc46b3d05[m
+Merge: e117f88 140b5cb
+Author: Sergio <160177423+skudz96@users.noreply.github.com>
+Date:   Wed Mar 5 11:29:15 2025 +0000
+
+    Merge pull request #23 from SchoolOfCode/serge-webSockets
+    
+    changed connection URLs to deployed projects rather than localhost
+
+[33mcommit 140b5cb47b378111c6d887a3406c079da867b3b6[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 11:24:56 2025 +0000
+
+    changed connection URLs to deployed projects rather than localhost
+
+[33mcommit e117f8890b8c1a9d523366645273d0f5bfd61e64[m
+Merge: 1a34773 44e38fc
+Author: Ashton Bailey <95630289+menice4@users.noreply.github.com>
+Date:   Wed Mar 5 11:20:45 2025 +0000
+
+    t pusMerge branch 'main' of https://github.com/SchoolOfCode/final-project-airon-chefs
+    merge with commpoents
+
+[33mcommit 1a347734ca790c9148f1e6dfaa8e495b7cd8fc70[m
+Author: Ashton Bailey <95630289+menice4@users.noreply.github.com>
+Date:   Wed Mar 5 11:20:29 2025 +0000
+
+    added file structure
+
+[33mcommit 44e38fc50363a36f1496ed6f17ec4ad2dba48995[m
+Merge: 448d73a cfbb10b
+Author: Sergio <160177423+skudz96@users.noreply.github.com>
+Date:   Wed Mar 5 11:16:58 2025 +0000
+
+    Merge pull request #22 from SchoolOfCode/serge-webSockets
+    
+    added vercelignore file
+
+[33mcommit cfbb10bde2a905a9495bb700664c9bb474043445[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 11:14:54 2025 +0000
+
+    added vercelignore file
+
+[33mcommit 448d73a819e9165a463c6bafd0da3eecc3d916bc[m
+Merge: d3df536 f38fe9c
+Author: Sergio <160177423+skudz96@users.noreply.github.com>
+Date:   Wed Mar 5 11:11:12 2025 +0000
+
+    Merge pull request #21 from SchoolOfCode/serge-webSockets
+    
+    Web socket progress, working chatroom
+
+[33mcommit f38fe9ca8d9fe96239b05832c88cc39f775f3032[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Wed Mar 5 10:44:31 2025 +0000
+
+    web sockets being passed through context rather than in chat component. Works as expected
+
+[33mcommit f66e194399056656a3033b330b3ade8aa45bb063[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 23:04:44 2025 +0000
+
+    socket broadcast instead of io emit to prevent message duplicate from same socket
+
+[33mcommit ae5fa84cc3beab41efdebe8260776f0ffe6583a4[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 23:03:19 2025 +0000
+
+    chat interface works for multiple browsers
+
+[33mcommit 0dfa78797d82299128f63dd05ec02d609ebc1356[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 22:45:00 2025 +0000
+
+    can send messages to server from any browser
+
+[33mcommit ab49364893bbabf764569a5ccd155d3102510c71[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 22:38:10 2025 +0000
+
+    chat component to test web sockets
+
+[33mcommit d2d3bf347c17fada2761138f828c8879a057f10f[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 22:37:34 2025 +0000
+
+    changed app.listen to server.listen, ensures both express and socket are running on same server instance to avoid conflicts
+
+[33mcommit d3df536f800ffcbb1939b893a58fd05b557d5b59[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 14:52:49 2025 +0000
+
+    added dev script
+
+[33mcommit 2955e9c304b6fb6c9c8ee4b0f6f1e827c646ac96[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 14:50:32 2025 +0000
+
+    configuring backend yaml
+
+[33mcommit 9a30202a9e56e7716655efd99554a5dd7c57623b[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 14:43:57 2025 +0000
+
+    backend filebase set up. Ticket #1
+
+[33mcommit 43a88e4953a90016aab0b5eb0018ee10147070d6[m
+Author: Ashton Bailey <95630289+menice4@users.noreply.github.com>
+Date:   Tue Mar 4 14:30:07 2025 +0000
+
+    Update README.md
+
+[33mcommit 091cb441a1bc742d66bc5262b8bcc9bbfa9f17e1[m
+Author: Sergio <sergeh96@gmail.com>
+Date:   Tue Mar 4 13:49:41 2025 +0000
+
+    codebase initialized. Ticket #1 . Deployment next
+
+[33mcommit f92fd40305256a80506bbc1c7c285bec3acdc37a[m
+Author: Jackafella1 <jackafella@gmail.com>
+Date:   Tue Mar 4 13:45:53 2025 +0000
+
+    #1
+
+[33mcommit bfa88da65a3f9fc23ad6f9ecece628130df1fae1[m
+Author: Jackafella1 <jackafella@gmail.com>
+Date:   Tue Mar 4 13:39:25 2025 +0000
+
+    1st commit
+
+[33mcommit b14e69ec8b26c68e736f0e6ed987f28dbee1540b[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Mon Mar 3 08:44:17 2025 +0000
+
+    Initial commit
