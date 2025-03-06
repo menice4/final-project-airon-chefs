@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -59,7 +58,6 @@ const LoginPage = () => {
           {loadingGithub ? "Logging in..." : "Sign in with GitHub"}
         </button>
       </div>
-      <Link to="/home">Go to Home</Link>
     </div>
   );
 };

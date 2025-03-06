@@ -1,5 +1,5 @@
 // src/context/AuthContext.tsx
-import React, {
+import {
   createContext,
   useState,
   useEffect,
@@ -8,9 +8,10 @@ import React, {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient"; // Import Supabase client
+import { Session, AuthChangeEvent } from "@supabase/supabase-js"; // Import Supabase types
 
 interface AuthContextType {
-  session: boolean;
+  session: Session | null;
   googleSignIn: () => Promise<{ error?: string }>;
   githubSignIn: () => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
@@ -19,27 +20,29 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [session, setSession] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
   const navigate = useNavigate();
 
   // Listen for auth state changes (e.g., after login)
   useEffect(() => {
     // Set initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(!!session);
+      setSession(session);
     });
 
     // Listen for auth state changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(!!session);
-      if (event === "SIGNED_IN") {
-        navigate("/home"); // Redirect to /home after login
-      } else if (event === "SIGNED_OUT") {
-        navigate("/"); // Redirect to login page after sign-out
+    } = supabase.auth.onAuthStateChange(
+      (event: AuthChangeEvent, session: Session | null) => {
+        setSession(session);
+        if (event === "SIGNED_IN") {
+          navigate("/home"); // Redirect to /home after login
+        } else if (event === "SIGNED_OUT") {
+          navigate("/"); // Redirect to login page after sign-out
+        }
       }
-    });
+    );
 
     // Cleanup subscription on unmount
     return () => {
@@ -66,7 +69,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Sign-Out
   const signOut = async () => {
     await supabase.auth.signOut();
-    setSession(false);
+    setSession(null);
     navigate("/");
   };
 

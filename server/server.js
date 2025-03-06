@@ -8,14 +8,14 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5002;
 const HOST = `0.0.0.0`;
 
 app.use(
   cors({
     origin: [
       "https://final-project-quiz-mania.vercel.app",
-      "http://localhost:5174",
+      "http://localhost:5173",
     ],
 
     methods: ["GET", "POST"],
@@ -49,7 +49,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: [
-      "http://localhost:5174",
+      "http://localhost:5173",
       "https://final-project-quiz-mania.vercel.app",
     ],
 

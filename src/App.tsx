@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Lobby from "./Pages/QuizLobbyPage/Lobby";
 import QuizPage from "./Pages/QuizPage/QuizPage";
 import EndPage from "./Pages/EndPage/EndPage";
@@ -22,15 +22,26 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      {session && (
-        <>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/quiz-lobby" element={<Lobby />} />
-          <Route path="/quiz" element={<QuizPage />} />
-          <Route path="/quiz-multi" element={<QuizPageMulti />} />
-          <Route path="/end" element={<EndPage />} />
-        </>
-      )}
+      <Route
+        path="/home"
+        element={session ? <HomePage /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/quiz-lobby"
+        element={session ? <Lobby /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/quiz"
+        element={session ? <QuizPage /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/quiz-multi"
+        element={session ? <QuizPageMulti /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/end"
+        element={session ? <EndPage /> : <Navigate to="/" />}
+      />
     </Routes>
   );
 }
