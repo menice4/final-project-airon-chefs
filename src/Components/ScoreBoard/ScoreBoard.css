@@ -1,70 +1,250 @@
-/* ScoreBoard.css */
+/* ScoreBoard.css - Fixed alignment issues */
+
 .scoreboard-container {
-  background-color: #1e293b; /* Dark background */
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Darker shadow */
-  padding: 15px;
-  max-width: 400px;
-  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  padding: 1.2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
+/* Decorative corner accents */
+.scoreboard-container::before,
+.scoreboard-container::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.scoreboard-container::before {
+  top: -20px;
+  left: -20px;
+  background-color: #ff4d8d;
+  border-radius: 50%;
+}
+
+.scoreboard-container::after {
+  bottom: -20px;
+  right: -20px;
+  background-color: #ffde59;
+  border-radius: 50%;
+}
+
+/* Leaderboard title */
 .scoreboard-container h3 {
-  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
   text-align: center;
-  color: #e2e8f0; /* Light text color */
-  padding-bottom: 10px;
-  border-bottom: 1px solid #475569; /* Darker border */
+  position: relative;
+  font-weight: 700;
+  z-index: 1;
 }
 
-/* Apply the same grid structure to both header and rows */
-.scoreboard-header,
+/* Remove the floating trophy */
+/* .scoreboard-container h3::after {
+  content: "🏆";
+  position: absolute;
+  top: -5px;
+  right: -30px;
+  font-size: 1.2rem;
+} */
+
+/* Header row - Fixed grid layout */
+.scoreboard-header {
+  display: grid;
+  grid-template-columns: 60px 1fr 80px; /* Fixed width columns */
+  padding: 0.8rem 1rem;
+  background-color: rgba(255, 77, 141, 0.25);
+  border-radius: 10px 10px 0 0;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Improved column alignment in header */
+.scoreboard-header .rank {
+  text-align: center;
+}
+
+.scoreboard-header .player {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+.scoreboard-header .score {
+  text-align: center;
+}
+
+/* Scoreboard body */
+.scoreboard-body {
+  max-height: 300px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 77, 141, 0.5) rgba(255, 255, 255, 0.3);
+}
+
+.scoreboard-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scoreboard-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.scoreboard-body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 77, 141, 0.5);
+  border-radius: 10px;
+}
+
+/* Player rows - Fixed grid layout to match header */
 .scoreboard-body > div {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  padding: 8px 0;
-  text-align: left;
+  grid-template-columns: 60px 1fr 80px; /* Fixed width columns - same as header */
+  padding: 0.8rem 1rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: #222;
 }
 
-.scoreboard-header {
-  font-weight: bold;
-  color: #94a3b8; /* Light text color */
-  border-bottom: 1px solid #475569; /* Darker border */
+.scoreboard-body > div:hover {
+  transform: translateX(5px);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
-.scoreboard-body > div {
-  border-bottom: 1px solid #334155; /* Darker border */
-  transition: background-color 0.3s ease;
-}
-
-.scoreboard-body > div:last-child {
-  border-bottom: none;
-}
-
+/* Current player highlight - moved emoji to not overlap score */
 .scoreboard-body > div.current-player {
-  background-color: rgba(70, 130, 180, 0.1); /* Slightly lighter background */
-  font-weight: bold;
+  background-color: rgba(255, 77, 141, 0.25);
+  border-left: 4px solid #ff4d8d;
+  font-weight: 600;
 }
 
+.scoreboard-body > div.current-player .player::after {
+  content: "👈";
+  margin-left: 8px;
+  font-size: 0.9rem;
+  color: #d63973;
+}
+
+/* Rank styling */
 .rank {
-  text-align: center;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Special styling for top 3 players */
+.scoreboard-body > div:nth-child(1) .rank::before {
+  content: "👑";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 1.2rem;
+  animation: float 2s ease-in-out infinite;
+}
+
+.scoreboard-body > div:nth-child(2) .rank::before {
+  content: "🥈";
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  font-size: 1rem;
+}
+
+.scoreboard-body > div:nth-child(3) .rank::before {
+  content: "🥉";
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  font-size: 1rem;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Player name styling */
 .player {
-  text-align: left;
+  font-weight: 500;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #e2e8f0; /* Light text color */
+  padding: 0 0.5rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
 }
 
+/* Score styling */
 .score {
-  text-align: right;
-  font-weight: bold;
-  color: #e2e8f0; /* Light text color */
+  font-weight: 700;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 222, 89, 0.4);
+  border-radius: 20px;
+  padding: 0.2rem 0.5rem;
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
 }
 
+/* Empty state */
 .no-scores {
+  padding: 2rem;
   text-align: center;
-  padding: 20px;
-  color: #94a3b8; /* Light text color */
+  color: #444;
+  font-style: italic;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scoreboard-container h3 {
+    font-size: 1.3rem;
+  }
+
+  .scoreboard-header,
+  .scoreboard-body > div {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation for new score updates */
+@keyframes scoreUpdate {
+  0% {
+    background-color: rgba(255, 222, 89, 0.5);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.score-updated {
+  animation: scoreUpdate 1.5s ease;
 }

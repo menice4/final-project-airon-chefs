@@ -1,69 +1,281 @@
-body {
-  background-color: #0f172a;
-  background-image: linear-gradient(135deg, #1d173b 0%, #272669 100%);
-  color: #e2e8f0;
-  line-height: 1.5;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* LoginPage.css - Styling for the login/authentication page */
 
-.loginContainer {
-  width: 400px;
-  padding: 40px;
-  background-color: #1e293b;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+.login-page {
+  width: 90%;
+  max-width: 500px;
+  margin: 10vh auto;
+  padding: 3rem;
+  background: linear-gradient(135deg, #fff6e5 0%, #ffe8f7 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #f8fafc;
-  font-weight: 700;
-  background: linear-gradient(90deg, #38bdf8, #818cf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-input[type="text"],
-input[type="password"] {
+/* Logo/title styling */
+.login-page h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.login-page h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
   width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  background-color: #334155;
-  border: none;
-  border-radius: 8px;
-  color: #e2e8f0;
-  font-size: 1rem;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 77, 141, 0.7),
+    transparent
+  );
 }
 
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 20px;
-  background-color: #1e40af;
-  border: none;
-  border-radius: 8px;
+/* Subtitle */
+.login-page p {
   font-size: 1.2rem;
-  color: white;
+  color: #555;
+  margin-bottom: 2.5rem;
+}
+
+/* Error message */
+.login-page .error {
+  background-color: rgba(255, 99, 71, 0.2);
+  color: #d32f2f;
+  padding: 0.8rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  border-left: 4px solid #d32f2f;
+  text-align: left;
+}
+
+/* Login buttons container */
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* Base button styles */
+.login-buttons button {
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-  background-color: #475569;
-  transform: translateY(-2px);
+.login-buttons button:hover:not(:disabled) {
+  transform: translateY(-5px);
+  box-shadow: 0 11px 0 rgba(0, 0, 0, 0.1);
 }
 
-.errorMessage {
-  color: #fecaca;
-  background-color: #450a0a;
-  border-radius: 8px;
-  border-left: 4px solid #ef4444;
-  padding: 10px;
-  margin-top: 20px;
+.login-buttons button:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Google button */
+.google-btn {
+  background-color: white;
+  color: #444;
+}
+
+.google-btn::before {
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M3.064 7.51A9.996 9.996 0 0 1 12 2c2.695 0 4.959.99 6.69 2.605l-2.867 2.868C14.786 6.482 13.468 5.977 12 5.977c-2.605 0-4.81 1.76-5.595 4.123-.2.6-.314 1.24-.314 1.9 0 .66.114 1.3.314 1.9.786 2.364 2.99 4.123 5.595 4.123 1.345 0 2.49-.355 3.386-.955a4.6 4.6 0 0 0 1.996-3.018H12v-3.868h9.418c.118.654.182 1.336.182 2.045 0 3.046-1.09 5.61-2.982 7.35C16.964 21.105 14.7 22 12 22A9.996 9.996 0 0 1 2 12c0-1.614.386-3.14 1.064-4.49z' fill='%234285F4'/%3E%3Cpath d='M15.823 13.455C15.327 15.195 13.83 16.5 12 16.5c-2.045 0-3.818-1.545-4.187-3.59-.068-.386-.113-.773-.113-1.182 0-.409.045-.795.113-1.182C8.182 8.5 9.955 6.955 12 6.955c1.327 0 2.523.6 3.382 1.545l2.25-2.25C16.11 4.636 14.21 3.75 12 3.75c-3.955 0-7.227 3-7.773 6.886C4.09 11.25 4 11.864 4 12.5s.09 1.25.227 1.864C4.773 18.25 8.045 21.25 12 21.25c3.75 0 6.955-2.795 7.614-6.614.136-.773.205-1.59.205-2.386h-3.996z' fill='%23EA4335'/%3E%3Cpath d='M12 16.5c-1.83 0-3.327-1.305-3.823-3.045C8.09 13.068 8.045 12.682 8.045 12.273c0-.41.045-.796.132-1.182.496-1.74 1.993-3.045 3.823-3.045 1.327 0 2.523.6 3.382 1.545l2.25-2.25C16.11 5.727 14.21 4.84 12 4.84c-3.955 0-7.227 3-7.773 6.887C4.09 12.34 4 12.954 4 13.59s.09 1.25.227 1.864C4.773 19.34 8.045 22.34 12 22.34c3.75 0 6.955-2.795 7.614-6.614.136-.773.205-1.59.205-2.386h-3.996c-.068.386-.113.773-.113 1.182 0 .409.045.795.113 1.182.37 2.045 2.142 3.59 4.187 3.59 1.83 0 3.327-1.305 3.823-3.045' fill='%23FBBC05'/%3E%3Cpath d='M12 6.955c1.327 0 2.523.6 3.382 1.545l2.25-2.25C16.11 4.636 14.21 3.75 12 3.75c-3.955 0-7.227 3-7.773 6.886C4.09 11.25 4 11.864 4 12.5s.09 1.25.227 1.864c.545 3.886 3.818 6.886 7.773 6.886 2.21 0 4.11-.886 5.632-2.5l-2.25-2.25c-.86.945-2.055 1.545-3.382 1.545-2.045 0-3.818-1.545-4.187-3.59-.068-.386-.113-.773-.113-1.182 0-.409.045-.795.113-1.182C8.182 8.5 9.955 6.955 12 6.955z' fill='%230F9D58'/%3E%3C/svg%3E");
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.google-btn:hover:not(:disabled) {
+  background-color: #f5f5f5;
+}
+
+/* GitHub button */
+.github-btn {
+  background-color: #24292e;
+  color: white;
+}
+
+.github-btn::before {
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 0 0 6.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 0 1 2.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10z' fill='white'/%3E%3C/svg%3E");
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.github-btn:hover:not(:disabled) {
+  background-color: #3a3f45;
+}
+
+/* Disabled state */
+.login-buttons button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Loading animation */
+.login-buttons button:disabled::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Decorative elements */
+.login-page::before,
+.login-page::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.login-page::before {
+  top: -100px;
+  left: -100px;
+  background-color: rgba(255, 77, 141, 0.2);
+  animation: float 8s ease-in-out infinite;
+}
+
+.login-page::after {
+  bottom: -100px;
+  right: -100px;
+  background-color: rgba(255, 222, 89, 0.2);
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(20px, 20px) rotate(10deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* Quiz icon animation */
+.login-page::before {
+  content: "❓";
+  font-size: 2rem;
+  color: rgba(255, 77, 141, 0.7);
+  background: none;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  animation: bounce 3s ease-in-out infinite;
+}
+
+.login-page::after {
+  content: "❓";
+  font-size: 2rem;
+  color: rgba(255, 222, 89, 0.7);
+  background: none;
+  width: auto;
+  height: auto;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  animation: bounce 3s ease-in-out infinite 1.5s;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-page {
+    width: 90%;
+    padding: 2rem;
+    margin: 5vh auto;
+  }
+
+  .login-page h2 {
+    font-size: 2rem;
+  }
+
+  .login-page p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .login-buttons button {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+}
+
+/* Add a quiz logo container if you want to add your logo */
+.quiz-logo {
+  margin-bottom: 1.5rem;
+  max-width: 150px;
+  margin: 0 auto 1.5rem;
+}
+
+.quiz-logo img {
+  width: 100%;
+  height: auto;
 }

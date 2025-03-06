@@ -1,7 +1,10 @@
+"use client";
+
+// Example of how to use these CSS files with your component
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-import "./HomePage.css"; // Assuming you have a CSS file for styling
+import "./HomePage.css"; // Import the HomePage CSS
 import { QuizmaniaLogo } from "../../Components/Logo/Logo";
 
 const HomePage = () => {
@@ -20,27 +23,32 @@ const HomePage = () => {
   };
 
   return (
-    <div className="home-container">
-      <h1>
-        <QuizmaniaLogo />
-      </h1>
-      <p>Choose a mode to get started:</p>
+    <div className="page-wrapper">
+      <div className="home-container">
+        <h1>
+          <QuizmaniaLogo />
+        </h1>
+        <p>Choose a mode to get started:</p>
 
-      <div className="button-group">
-        <button onClick={() => navigate("/quiz")} className="btn singleplayer">
-          🎮 Single Player
-        </button>
-        <button
-          onClick={() => navigate("/quiz-lobby")}
-          className="btn multiplayer"
-        >
-          👥 Multiplayer
+        <div className="button-group">
+          <button
+            onClick={() => navigate("/quiz")}
+            className="btn singleplayer"
+          >
+            🎮 Single Player
+          </button>
+          <button
+            onClick={() => navigate("/quiz-lobby")}
+            className="btn multiplayer"
+          >
+            👥 Multiplayer
+          </button>
+        </div>
+
+        <button onClick={handleSignOut} className="btn signout">
+          Sign Out
         </button>
       </div>
-
-      <button onClick={handleSignOut} className="btn signout">
-        Sign Out
-      </button>
     </div>
   );
 };

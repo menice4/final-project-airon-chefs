@@ -1,72 +1,285 @@
-/* Dark Mode Style */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "SF Pro Display", "Roboto", sans-serif;
-}
-
-body {
-  background-color: #0f172a;
-  background-image: linear-gradient(135deg, #1d173b 0%, #272669 100%);
-  color: #e2e8f0;
-  line-height: 1.5;
-  min-height: 100vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.container {
-  width: 10%;
-  margin:  auto;
-  padding: 0px;
-  background-color: #1e293b;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 2px solid #334155; /* Added solid border */
+/* HomePage.css */
+/* Target both the wrapper and container */
+.page-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .home-container {
+  width: 80% !important; /* Adjust this value to make it wider */
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: 0 !important;
+  transform: none !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+
+/* If you want it even wider, try this */
+@media (min-width: 768px) {
+  .home-container {
+    width: 90% !important; /* Even wider on larger screens */
+  }
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%; /* Set width to 70% of the screen */
+  margin: 5vh auto; /* Center horizontally with some vertical margin */
+  padding: 3rem 4rem;
+  min-height: 80vh; /* Shorter than full viewport height */
+  background: linear-gradient(135deg, #e0d6c5 0%, #d8c9d3 100%);
+
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden; /* Keep the floating elements contained */
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add a subtle background to the entire page */
+body {
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo styling - adjust as needed based on your actual logo component */
+.home-container h1 {
+  margin-bottom: 2rem;
+  transform: scale(1.2);
+}
+
+/* Welcome text */
+.home-container p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  color: #333;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Button group container */
+.button-group {
+  display: flex;
+  flex-direction: row; /* Default to row layout for wider screens */
+  gap: 2rem;
   width: 100%;
-  margin: 0 auto;
-  margin-left: 30%;
-  padding: 20px;
-  background-color: #1e293b;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 2px solid #334155; /* Added solid border */
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
-h1 {
-  font-size: 2.6rem;
-  margin-bottom: 20px;
-  color: #f8fafc;
+/* Base button styles */
+.btn {
+  padding: 1.2rem 2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #38bdf8, #818cf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-p {
-  font-size: 1.25rem;
-  margin-bottom: 20px;
-  color: #e2e8f0;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #334155;
   border: none;
-  border-radius: 8px;
-  font-size: 1.25rem;
-  color: #e2e8f0;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+  color: #333;
+  min-width: 200px; /* Ensure buttons have a minimum width */
 }
 
-button:hover {
-  background-color: #475569;
-  transform: translateY(-2px);
+.btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 13px 0 rgba(0, 0, 0, 0.2);
 }
+
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Button specific styles */
+.singleplayer {
+  background-color: #ff4d8d; /* Pink from logo */
+  color: white;
+}
+
+.singleplayer:hover {
+  background-color: #ff69a1;
+}
+
+.singleplayer:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 3s infinite;
+}
+
+.multiplayer {
+  background-color: #ffde59; /* Yellow from logo */
+  color: #333;
+}
+
+.multiplayer:hover {
+  background-color: #ffe88c;
+}
+
+.multiplayer:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 3s infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Sign out button */
+.signout {
+  background-color: #f0f0f0;
+  color: #666;
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+}
+
+.signout:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Emoji styling */
+.btn::before {
+  margin-right: 10px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+  .home-container {
+    width: 85%;
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    width: 90%;
+    padding: 2rem;
+    margin: 2vh auto;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Add some decorative elements */
+.home-container::before,
+.home-container::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.home-container::before {
+  top: -50px;
+  left: -50px;
+  background-color: rgba(255, 77, 141, 0.2);
+  animation: float 8s ease-in-out infinite;
+}
+
+.home-container::after {
+  bottom: -50px;
+  right: -50px;
+  background-color: rgba(255, 222, 89, 0.2);
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+/* For debugging - add this temporarily */
+/* .page-wrapper {
+  outline: 2px dashed blue;
+}
+
+.home-container {
+  outline: 2px dashed red;
+}
+ */
