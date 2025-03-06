@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchData from "./fetchData";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
-import Timer from "../../Components/Timer/Timer";
+import Clock from "../../Components/Clock/Clock";
 
 type Question = {
   question: string;
@@ -89,7 +89,7 @@ export default function QuizPage() {
       <p>Score: {score}</p>
       {currentQuestion && (
         <div>
-          <Timer key={currentQuestionIndex} duration={10} onComplete={handleTimerComplete} />
+          <Clock key={currentQuestionIndex} duration={10} onComplete={handleTimerComplete} />
           <p>{currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}</p>
           <ul>
             {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (

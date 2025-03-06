@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
-import Timer from "../../Components/Timer/Timer";
+import Clock from "../../Components/Clock/Clock";
 import { useSocket } from "../../Context/SocketContext";
 
 type Question = {
@@ -129,7 +129,7 @@ export default function QuizPageMulti() {
       <h1>Welcome to the Quiz</h1>
       <p>Score: {score}</p>
       <div>
-        <Timer key={currentQuestionIndex} duration={10} onComplete={handleTimerComplete} />
+        <Clock key={currentQuestionIndex} duration={10} onComplete={handleTimerComplete} />
         <p>{currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}</p>
         <ul>
           {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
