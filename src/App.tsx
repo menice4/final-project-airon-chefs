@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Lobby from "./Pages/QuizLobbyPage/Lobby";
 import QuizPage from "./Pages/QuizPage/QuizPage";

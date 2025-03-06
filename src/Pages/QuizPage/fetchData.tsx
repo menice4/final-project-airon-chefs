@@ -57,9 +57,12 @@ export default async function fetchData(): Promise<Question[]> {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
-    const response = await fetch("http://localhost:5002/api/questions", {
-      signal: controller.signal,
-    }).finally(() => clearTimeout(timeoutId));
+    const response = await fetch(
+      "https://quiz-mania-ug0x.onrender.com/api/questions",
+      {
+        signal: controller.signal,
+      }
+    ).finally(() => clearTimeout(timeoutId));
 
     if (!response.ok) {
       console.warn(`API returned status: ${response.status}`);
