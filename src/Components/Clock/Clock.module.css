@@ -2,12 +2,18 @@
     display: flex;
     align-items: center;
     font-size: 1.5rem;
-  }
-  
-  .clock-icon {
+    color: #e2e8f0; /* Light text color */
+    background-color: #1e293b; /* Dark background color */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.clock-icon {
     margin-right: 0.5rem;
-  }
-  
-  .time-left {
+    color: #38bdf8; /* Light blue color for the icon */
+}
+
+.time-left {
     font-weight: bold;
-  }
+    color: #f8fafc; /* Light text color */
+}

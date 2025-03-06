@@ -11,27 +11,27 @@ const Timer: React.FC<TimerProps> = ({ duration, onComplete }) => {
   const [bufferTime, setBufferTime] = useState(5);
 
   useEffect(() => {
-    if (timeLeft === 0 && bufferTime === 0) {
-      onComplete();
-      return;
-    }
+    let timerId: NodeJS.Timeout;
+
     if (timeLeft > 0) {
-    const timerId = setTimeout(() => {
-      setTimeLeft(timeLeft - 1);
-    }, 1000);
+      timerId = setTimeout(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+    } else if (bufferTime > 0) {
+      timerId = setTimeout(() => {
+        setBufferTime(bufferTime - 1);
+      }, 1000);
+    } else {
+      onComplete();
+    }
+
     return () => clearTimeout(timerId);
-  } else if (bufferTime > 0){
-    const bufferId = setTimeout(() => {
-      setBufferTime(bufferTime - 1);
-    }, 1000);
-    return () => clearTimeout(bufferId);
-  }
-}, [timeLeft, bufferTime, onComplete]);
+  }, [timeLeft, bufferTime, onComplete]);
 
   return (
     <div className="timer">
       <span className="clock-icon">🕒</span>
-      <span className="time-left">{timeLeft > 0 ? timeLeft : bufferTime}</span>
+      <span className="time-left">{timeLeft > 0 ? timeLeft : ''}</span>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 #root {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 100%;
+  margin-right: 15%;
   text-align: center;
 }
 
@@ -38,7 +37,7 @@ button {
   padding: 10px;
   margin-top: 10px;
   background-color: var(--button-color);
-  color: white;
+  color: rgb(177, 0, 0);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -143,4 +142,55 @@ button:hover {
   color: #d32f2f;
   margin-bottom: 15px;
   font-size: 14px;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  --background-color: #0f172a;
+  --text-color: #e2e8f0;
+  --input-border-color: #475569;
+  --button-color: #334155;
+  --button-hover-color: #475569;
+  --error-color: #d32f2f;
+}
+
+.dark-mode #root {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.dark-mode .chat-container,
+.dark-mode .chat-form,
+.dark-mode .login-page {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.dark-mode input {
+  background-color: #1e293b;
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+}
+
+.dark-mode button {
+  background-color: var(--button-color);
+  color: var(--text-color);
+}
+
+.dark-mode button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.dark-mode .chatbox {
+  background-color: #1e293b;
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+}
+
+.dark-mode .chat-message {
+  border-bottom: 1px solid var(--input-border-color);
+}
+
+.dark-mode .error {
+  color: var(--error-color);
 }

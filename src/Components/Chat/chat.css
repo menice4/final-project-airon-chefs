@@ -1,0 +1,47 @@
+/* Default light mode styles */
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.chat-container {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+.chat-message {
+    background-color: #e0e0e0;
+    color: #000000;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #0f172a;
+        background-image: linear-gradient(135deg, #1d173b 0%, #272669 100%);
+        color: #e2e8f0;
+    }
+
+    .chat-container {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .chat-message {
+        background-color: #334155;
+        color: #e2e8f0;
+    }
+
+    .chat-message h1 {
+        color: #f8fafc;
+        background: linear-gradient(90deg, #38bdf8, #818cf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .chat-message p {
+        color: #e2e8f0;
+    }
+}
