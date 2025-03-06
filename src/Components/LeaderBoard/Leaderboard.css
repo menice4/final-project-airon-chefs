@@ -1,0 +1,57 @@
+/* Dark Mode Style */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "SF Pro Display", "Roboto", sans-serif;
+}
+
+body {
+  background-color: #0f172a;
+  background-image: linear-gradient(135deg, #1d173b 0%, #272669 100%);
+  color: #e2e8f0;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.leaderboardContainer {
+  width: 80%;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #1e293b;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 20px;
+  color: #f8fafc;
+  font-weight: 700;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.leaderboardItem {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding: 10px 20px;
+  background-color: #334155;
+  border-radius: 8px;
+  color: #e2e8f0;
+}
+
+.leaderboardItem:nth-child(even) {
+  background-color: #475569;
+}
+
+.leaderboardItem:hover {
+  background-color: #1e40af;
+  color: white;
+}

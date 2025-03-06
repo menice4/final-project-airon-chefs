@@ -2,6 +2,7 @@ import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Lobby from "./Pages/QuizLobbyPage/Lobby";
 import QuizPage from "./Pages/QuizPage/QuizPage";
+import QuizPageTest from "./Pages/quiz test/QuizPageTest";
 import EndPage from "./Pages/EndPage/EndPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import LoginPage from "./Pages/LoginPage/LoginPage";
@@ -35,6 +36,10 @@ function App() {
         element={session ? <QuizPage /> : <Navigate to="/" />}
       />
       <Route
+        path="/quiz-test"
+        element={session ? <QuizPageTest /> : <Navigate to="/" />} // Add the test route
+      />
+      <Route
         path="/quiz-multi"
         element={session ? <QuizPageMulti /> : <Navigate to="/" />}
       />
@@ -43,6 +48,7 @@ function App() {
         element={session ? <EndPage /> : <Navigate to="/" />}
       />
     </Routes>
+
   );
 }
 

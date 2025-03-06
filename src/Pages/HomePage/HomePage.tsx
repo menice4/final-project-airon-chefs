@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import "./HomePage.css"; // Assuming you have a CSS file for styling
+import { QuizmaniaLogo } from "../../Components/Logo/Logo";
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
@@ -20,7 +21,7 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      <h1>Welcome to the Quiz Game</h1>
+      <h1><QuizmaniaLogo/></h1>
       <p>Choose a mode to get started:</p>
 
       <div className="button-group">
@@ -34,6 +35,9 @@ const HomePage = () => {
           👥 Multiplayer
         </button>
       </div>
+      <button onClick={() => navigate("/quiz-test")} className="btn quiz-test">
+          Dev test
+        </button>
 
       <button onClick={handleSignOut} className="btn signout">
         Sign Out
