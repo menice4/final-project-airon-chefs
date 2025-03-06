@@ -8,14 +8,14 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const HOST = `0.0.0.0`;
 
 app.use(
   cors({
     origin: [
       "https://final-project-quiz-mania.vercel.app",
-      "http://localhost:5173",
+      "http://localhost:5174",
     ],
 
     methods: ["GET", "POST"],
@@ -49,7 +49,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: [
-      "http://localhost:5173",
+      "http://localhost:5174",
       "https://final-project-quiz-mania.vercel.app",
     ],
 
@@ -63,7 +63,7 @@ io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
 
   // Add a new user to the users object when connected
-  users[socket.id] = { id: socket.id, name: "" };
+  users[socket.id] = { id: socket.id, name: "", score: 0 };
 
   // Send updated user list to all clients
   io.emit("update-users", Object.values(users));
@@ -118,22 +118,24 @@ io.on("connection", (socket) => {
     }
   });
 
-  // Listens for answers being submitted to update scores
+  // Add this handler for answer submissions
   socket.on("submit-answer", (data) => {
-    const { isCorret, questionIndex } = data;
+    const { isCorrect, questionIndex } = data;
 
-    // Initialize score if first answer from this user
-    if (!userScores[socket.id]) {
-      userScores[socket.id] = 0;
+    // Make sure the user exists
+    if (users[socket.id]) {
+      // Increment score if answer is correct
+      if (isCorrect) {
+        // Initialize score if it doesn't exist
+        if (users[socket.id].score === undefined) {
+          users[socket.id].score = 0;
+        }
+        users[socket.id].score += 1;
+      }
+
+      // Create and broadcast scoreboard
+      broadcastScoreboard();
     }
-
-    // update score if answer is correct
-    if (isCorret) {
-      userScores[socket.id] += 1;
-    }
-
-    // broadcast updated scoreboard to all clients, helper function below
-    broadcastScoreboard();
   });
 
   // Helper function to broadcast updated scoreboard to all clients
@@ -145,6 +147,7 @@ io.on("connection", (socket) => {
         id: user.id,
         name: user.name || `Player ${user.id.substring(0, 4)}`,
         score: user.score || 0,
+        rank: 0,
       }))
       .sort((a, b) => b.score - a.score);
 
@@ -152,6 +155,9 @@ io.on("connection", (socket) => {
     scoreboard.forEach((user, index) => {
       user.rank = index + 1;
     });
+
+    // debugging
+    console.log("Broadcasting scoreboard:", scoreboard);
 
     // finally broadcast scoreboard to all clients
     io.emit("scoreboard-update", scoreboard);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSocket } from "../../Context/SocketContext";
+import "./ScoreBoard.css";
 
 // define player type
 interface Player {
@@ -43,13 +44,16 @@ export default function Scoreboard() {
       </div>
       <div className="scoreboard-body">
         {scores.length === 0 ? (
-          <div>No players yet</div>
+          <div className="no-scores">No players yet</div>
         ) : (
           scores.map((player: Player) => (
-            <div>
-              <span>{player.rank}</span>
-              <span>{player.name}</span>
-              <span>{player.score}</span>
+            <div
+              key={player.id}
+              className={player.id === currentUserId ? "current-player" : ""}
+            >
+              <span className="rank">{player.rank}</span>
+              <span className="player">{player.name || "Anonymous"} </span>
+              <span className="score">{player.score}</span>
             </div>
           ))
         )}
