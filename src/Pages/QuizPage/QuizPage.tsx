@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import fetchData from "./fetchData";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
 import Clock from "../../Components/Clock/Clock";
+import "./QuizPage.css";
 
 // Define our types
 export type Question = {

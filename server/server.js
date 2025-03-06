@@ -14,8 +14,8 @@ const HOST = `0.0.0.0`;
 app.use(
   cors({
     origin: [
-      "https://final-project-quiz-mania.vercel.app",
-      /* "http://localhost:5173", */
+      /* "https://final-project-quiz-mania.vercel.app", */
+      "http://localhost:5173",
     ],
 
     methods: ["GET", "POST"],
@@ -49,8 +49,8 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: [
-      /* "http://localhost:5173", */
-      "https://final-project-quiz-mania.vercel.app",
+      "http://localhost:5173",
+      /*  "https://final-project-quiz-mania.vercel.app", */
     ],
 
     methods: ["GET", "POST"],
@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
     console.log("Start game event received");
     try {
       const response = await fetch(
-        "https://opentdb.com/api.php?amount=10&type=multiple"
+        "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
       );
       const data = await response.json();
 

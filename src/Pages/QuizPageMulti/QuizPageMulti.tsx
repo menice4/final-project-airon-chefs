@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
 import Clock from "../../Components/Clock/Clock";
 import { useSocket } from "../../Context/SocketContext";
+import "./QuizPageMulti.css";
 
 // import the scoreboard
 import Scoreboard from "../../Components/ScoreBoard/ScoreBoard";
@@ -146,38 +147,44 @@ export default function QuizPageMulti() {
   }
 
   return (
-    <div>
+    <div className="quiz-multi-container">
       <h1>Welcome to the Quiz</h1>
       <p>Score: {score}</p>
-      <div>
-        <Clock
-          key={currentQuestionIndex}
-          duration={10}
-          onComplete={handleTimerComplete}
-        />
-        <p>
-          {currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}
-        </p>
-        <ul>
-          {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
-            <li key={answerIndex}>
-              <QuizAnswer
-                answer={decodeHtml(answer)}
-                onClick={(answer: string) =>
-                  handleAnswerClick(currentQuestionIndex, answer)
-                }
-                isSelected={selectedAnswers[currentQuestionIndex] === answer}
-                isCorrect={answer === currentQuestion.correct_answer}
-                isBufferTime={isBufferTime} // Pass the buffer time state
-                correctAnswer={currentQuestion.correct_answer} // Pass the correct answer
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="quiz-content-wrapper">
+        <div className="quiz-main-content">
+          <div className="question-container">
+            <Clock
+              key={currentQuestionIndex}
+              duration={10}
+              onComplete={handleTimerComplete}
+            />
+            <p>
+              {currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}
+            </p>
+            <ul>
+              {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
+                <li key={answerIndex}>
+                  <QuizAnswer
+                    answer={decodeHtml(answer)}
+                    onClick={(answer: string) =>
+                      handleAnswerClick(currentQuestionIndex, answer)
+                    }
+                    isSelected={
+                      selectedAnswers[currentQuestionIndex] === answer
+                    }
+                    isCorrect={answer === currentQuestion.correct_answer}
+                    isBufferTime={isBufferTime} // Pass the buffer time state
+                    correctAnswer={currentQuestion.correct_answer} // Pass the correct answer
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
-      <div className="scoreboard-wrapper">
-        <Scoreboard />
+        <div className="scoreboard-wrapper">
+          <Scoreboard />
+        </div>
       </div>
     </div>
   );

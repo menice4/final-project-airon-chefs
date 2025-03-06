@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSocket } from "../../Context/SocketContext.tsx";
 import Chat from "../../Components/Chat/ChatInterface.tsx";
+import "./Lobby.css";
 
 // React router to allow navigation to other pages
 import { useNavigate } from "react-router-dom";
@@ -73,35 +74,51 @@ export default function Lobby() {
   };
 
   return (
-    <div>
-      {/* ternary operator conditionally rendering a different UI based on whether a new user has set their name or not */}
-      <h1>Lobby</h1>
-      {!isUserNameSet ? (
-        <div>
-          <label htmlFor="name-input">Enter your name:</label>
-          <input
-            type="text"
-            id="name-input"
-            value={userNames}
-            onChange={(e) => setUserNames(e.target.value)}
-          />
-          <button onClick={handleRename}>Set Name</button>
-        </div>
-      ) : (
-        <div>
-          <div className="lobby-container">
-            <button onClick={handleGenerateInvite}>Generate Invite URL</button>
-            <button onClick={handleStartGame}>Start Game</button>
+    <div className="lobby-page-wrapper">
+      <div className="lobby-container">
+        <h1>Lobby</h1>
+        {!isUserNameSet ? (
+          <div className="name-input-container">
+            <label htmlFor="name-input">Enter your name:</label>
+            <input
+              type="text"
+              id="name-input"
+              value={userNames}
+              onChange={(e) => setUserNames(e.target.value)}
+            />
+            <button className="btn btn-primary" onClick={handleRename}>
+              Set Name
+            </button>
           </div>
-          <h2>Current Users</h2>
-          <ul>
-            {users.map((user) => (
-              <li key={user.id}>{user.name}</li>
-            ))}
-          </ul>
-          <Chat />
-        </div>
-      )}
+        ) : (
+          <div>
+            <div className="lobby-controls">
+              <button
+                className="btn btn-secondary"
+                onClick={handleGenerateInvite}
+              >
+                Generate Invite URL
+              </button>
+              <button className="btn btn-primary" onClick={handleStartGame}>
+                Start Game
+              </button>
+            </div>
+            <div className="users-section">
+              <h2>Current Users</h2>
+              <ul className="users-list">
+                {users.map((user) => (
+                  <li key={user.id} className="user-item">
+                    {user.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="chat-section">
+              <Chat />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
