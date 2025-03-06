@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
 import Clock from "../../Components/Clock/Clock";
-import { useSocket } from "../../context/SocketContext";
+import { useSocket } from "../../Context/SocketContext";
 
 // import the scoreboard
 import Scoreboard from "../../Components/ScoreBoard/ScoreBoard";

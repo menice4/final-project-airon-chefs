@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSocket } from "../../context/SocketContext";
+import { useSocket } from "../../Context/SocketContext";
 import "./ScoreBoard.css";
 
 // define player type

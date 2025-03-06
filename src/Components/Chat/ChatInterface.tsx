@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import socket io client
-import { useSocket } from "../../context/SocketContext";
+import { useSocket } from "../../Context/SocketContext";
 
 // Create a socket connection NO LONGER NEEDED, DONE IN CONTEXT
 /* const socket = io("http://localhost:5000"); 
