@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 const HomePage = () => {
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
-    throw new Error('AuthContext must be used within an AuthProvider');
+    throw new Error("AuthContext must be used within an AuthProvider");
   }
 
   const { signOut } = authContext;

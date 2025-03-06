@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 const LoginPage = () => {
   const authContext = useContext(AuthContext);
@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   if (!authContext) {
-    throw new Error('AuthContext must be used within an AuthProvider');
+    throw new Error("AuthContext must be used within an AuthProvider");
   }
 
   const { googleSignIn, githubSignIn } = authContext;
@@ -20,7 +20,7 @@ const LoginPage = () => {
     const { error } = await googleSignIn();
     setLoadingGoogle(false);
     if (error) {
-      setError('Google login failed. Please try again.');
+      setError("Google login failed. Please try again.");
       console.error(error);
     }
   };
@@ -31,7 +31,7 @@ const LoginPage = () => {
     const { error } = await githubSignIn();
     setLoadingGithub(false);
     if (error) {
-      setError('GitHub login failed. Please try again.');
+      setError("GitHub login failed. Please try again.");
       console.error(error);
     }
   };
@@ -48,7 +48,7 @@ const LoginPage = () => {
           className="google-btn"
           aria-label="Sign in with Google"
         >
-          {loadingGoogle ? 'Logging in...' : 'Sign in with Google'}
+          {loadingGoogle ? "Logging in..." : "Sign in with Google"}
         </button>
         <button
           onClick={handleGithubSignIn}
@@ -56,7 +56,7 @@ const LoginPage = () => {
           className="github-btn"
           aria-label="Sign in with GitHub"
         >
-          {loadingGithub ? 'Logging in...' : 'Sign in with GitHub'}
+          {loadingGithub ? "Logging in..." : "Sign in with GitHub"}
         </button>
       </div>
       <Link to="/home">Go to Home</Link>
