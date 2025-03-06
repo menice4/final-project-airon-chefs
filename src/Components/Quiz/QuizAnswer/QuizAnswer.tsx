@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './QuizAnswer.module.css';
 
 type QuizAnswerProps = {
@@ -6,20 +6,28 @@ type QuizAnswerProps = {
   onClick: (answer: string) => void;
   isSelected: boolean;
   isCorrect: boolean;
+  isBufferTime: boolean;
 };
 
-const QuizAnswer: React.FC<QuizAnswerProps> = ({ answer, onClick, isSelected, isCorrect }) => {
+const QuizAnswer: React.FC<QuizAnswerProps> = ({ answer, onClick, isSelected, isCorrect, isBufferTime }) => {
   const [hasSelected, setHasSelected] = useState(false);
 
+  useEffect(() => {
+    setHasSelected(false);
+  }, [answer]);
+
   const handleClick = () => {
+    if (!isBufferTime) { 
     setHasSelected(true);
     onClick(answer);
+    }
   };
 
-  const buttonClass = `${styles.button} ${isSelected ? styles.selected : ''} ${hasSelected && isCorrect ? styles.correct : ''} ${hasSelected && !isCorrect ? styles.incorrect : ''}`;
+  const buttonClass = `${styles.button} ${isSelected ? styles.selected : ''} ${isBufferTime && hasSelected && isCorrect ? styles.correct : ''} ${isBufferTime && hasSelected && !isCorrect ? styles.incorrect : ''}`;
+
 
   return (
-    <button onClick={handleClick} className={buttonClass}>
+    <button onClick={handleClick} className={buttonClass} disabled={isBufferTime}>
       {answer}
     </button>
   );
