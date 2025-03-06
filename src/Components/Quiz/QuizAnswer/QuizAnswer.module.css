@@ -3,12 +3,16 @@
     margin: 5px;
     border: 2px solid transparent;
     cursor: pointer;
+    background: linear-gradient(to right, #ec4899, #f97316)
   }
   
-  .correct {
-    border-color: green;
+  button.correct {
+    background: green;
   }
   
-  .incorrect {
-    border-color: red;
+  button.incorrect {
+    background: red;
+  }
+  .button.selected{
+    border: 2px solid #0066ff;
   }
