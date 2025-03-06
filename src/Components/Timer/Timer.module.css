@@ -1,0 +1,13 @@
+.timer {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+  
+  .clock-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .time-left {
+    font-weight: bold;
+  }
