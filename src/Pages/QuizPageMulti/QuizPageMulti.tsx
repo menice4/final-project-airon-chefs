@@ -15,11 +15,10 @@ export default function QuizPageMulti() {
   const socket = useSocket();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedAnswers, setSelectedAnswers] = useState<{
-    [key: number]: string;
-  }>({});
+  const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [isBufferTime, setIsBufferTime] = useState(false); // Added state for buffer time
   const navigate = useNavigate();
 
   // Use a ref to track if the component is mounted
@@ -93,11 +92,15 @@ export default function QuizPageMulti() {
   };
 
   const handleTimerComplete = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    } else {
-      navigate("/end");
-    }
+    setIsBufferTime(true); // Set buffer time to true
+    setTimeout(() => {
+      setIsBufferTime(false); // Reset buffer time after 5 seconds
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      } else {
+        navigate("/end");
+      }
+    }, 5000); // 5 seconds buffer time
   };
 
   // Extra debugging information
@@ -139,6 +142,7 @@ export default function QuizPageMulti() {
                 onClick={(answer) => handleAnswerClick(currentQuestionIndex, answer)}
                 isSelected={selectedAnswers[currentQuestionIndex] === answer}
                 isCorrect={answer === currentQuestion.correct_answer}
+                isBufferTime={isBufferTime} // Pass the buffer time state
               />
             </li>
           ))}

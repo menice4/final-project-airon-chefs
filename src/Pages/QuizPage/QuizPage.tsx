@@ -18,6 +18,7 @@ export default function QuizPage() {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [isBufferTime, setIsBufferTime] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,13 +67,16 @@ export default function QuizPage() {
   };
 
   const handleTimerComplete = () => {
+    setIsBufferTime(true);
+    setTimeout(() => {
+      setIsBufferTime(false);
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       navigate("/end");
     }
+  }, 5000);
   };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -99,6 +103,7 @@ export default function QuizPage() {
                   onClick={(answer) => handleAnswerClick(currentQuestionIndex, answer)}
                   isSelected={selectedAnswers[currentQuestionIndex] === answer}
                   isCorrect={answer === currentQuestion.correct_answer}
+                  isBufferTime={isBufferTime}
                 />
               </li>
             ))}
