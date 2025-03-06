@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styles from "./QuizAnswer.module.css";
+import React from "react";
+import "./QuizAnswer.css";
 
-type QuizAnswerProps = {
+interface QuizAnswerProps {
   answer: string;
   onClick: (answer: string) => void;
   isSelected: boolean;
   isCorrect: boolean;
   isBufferTime: boolean;
   correctAnswer: string | null;
-};
+}
 
 const QuizAnswer: React.FC<QuizAnswerProps> = ({
   answer,
@@ -16,31 +16,40 @@ const QuizAnswer: React.FC<QuizAnswerProps> = ({
   isSelected,
   isCorrect,
   isBufferTime,
+  correctAnswer,
 }) => {
-  const [hasSelected, setHasSelected] = useState(false);
+  // Determine the CSS class for the button based on state
+  const getButtonClass = () => {
+    const baseClass = "quiz-answer";
 
-  useEffect(() => {
-    setHasSelected(false);
-  }, [answer]);
-
-  const handleClick = () => {
     if (!isBufferTime) {
-      setHasSelected(true);
-      onClick(answer);
+      // During question time
+      return isSelected ? `${baseClass} selected` : baseClass;
+    } else {
+      // During buffer time (showing results)
+      if (answer === correctAnswer) {
+        return `${baseClass} correct`; // Highlight correct answer
+      } else if (isSelected) {
+        return `${baseClass} ${isCorrect ? "correct" : "incorrect"}`;
+      } else {
+        return baseClass;
+      }
     }
   };
 
-  const buttonClass = `${styles.button} ${isSelected ? styles.selected : ""} ${
-    isBufferTime && hasSelected && isCorrect ? styles.correct : ""
-  } ${isBufferTime && hasSelected && !isCorrect ? styles.incorrect : ""}`;
-
   return (
     <button
-      onClick={handleClick}
-      className={buttonClass}
+      className={getButtonClass()}
+      onClick={() => onClick(answer)}
       disabled={isBufferTime}
     >
-      {answer}
+      <span className="answer-text">{answer}</span>
+      {isBufferTime && (
+        <span className="answer-icon">
+          {answer === correctAnswer && "✓"}
+          {isSelected && !isCorrect && "✗"}
+        </span>
+      )}
     </button>
   );
 };
