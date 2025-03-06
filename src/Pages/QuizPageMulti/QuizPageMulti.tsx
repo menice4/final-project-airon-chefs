@@ -145,14 +145,22 @@ export default function QuizPageMulti() {
       <h1>Welcome to the Quiz</h1>
       <p>Score: {score}</p>
       <div>
-        <Clock key={currentQuestionIndex} duration={10} onComplete={handleTimerComplete} />
-        <p>{currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}</p>
+        <Clock
+          key={currentQuestionIndex}
+          duration={10}
+          onComplete={handleTimerComplete}
+        />
+        <p>
+          {currentQuestionIndex + 1}. {decodeHtml(currentQuestion.question)}
+        </p>
         <ul>
           {currentQuestion.shuffledAnswers?.map((answer, answerIndex) => (
             <li key={answerIndex}>
               <QuizAnswer
                 answer={decodeHtml(answer)}
-                onClick={(answer) => handleAnswerClick(currentQuestionIndex, answer)}
+                onClick={(answer) =>
+                  handleAnswerClick(currentQuestionIndex, answer)
+                }
                 isSelected={selectedAnswers[currentQuestionIndex] === answer}
                 isCorrect={answer === currentQuestion.correct_answer}
               />
@@ -161,9 +169,6 @@ export default function QuizPageMulti() {
         </ul>
       </div>
 
-      {currentQuestionIndex === questions.length - 1 && (
-        <Link to="/end">Finish</Link>
-      )}
       <div className="scoreboard-wrapper">
         <Scoreboard />
       </div>
