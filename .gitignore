@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# Ignore coverage files
-/coverage/
+.env
+h origin jj-branch

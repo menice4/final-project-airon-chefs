@@ -1,17 +1,19 @@
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
 import React from "react";
-// Import the socketProvider from context and wrap the App component in it
-import { SocketProvider } from "./Context/SocketContext.tsx";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App.tsx";
+import "./index.css";
+import { AuthProvider } from "./Context/AuthContext.tsx";
+import { SocketProvider } from "./Context/SocketContext.tsx";
 
-createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <SocketProvider>
-      <Router>
-        <App />
-      </Router>
-    </SocketProvider>
+    <Router>
+      <AuthProvider>
+        <SocketProvider>
+          <App />
+        </SocketProvider>
+      </AuthProvider>
+    </Router>
   </React.StrictMode>
 );

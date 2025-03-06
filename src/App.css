@@ -69,3 +69,78 @@ button:hover {
 .chat-message:last-child {
   border-bottom: none;
 }
+
+/* src/App.css */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
+  padding: 20px;
+}
+
+.login-page h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.login-page p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.google-btn {
+  background-color: #4285f4;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.google-btn:hover {
+  background-color: #3267d6;
+}
+
+.google-btn:disabled {
+  background-color: #a0c3ff;
+  cursor: not-allowed;
+}
+
+.github-btn {
+  background-color: #333;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.github-btn:hover {
+  background-color: #555;
+}
+
+.github-btn:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d32f2f;
+  margin-bottom: 15px;
+  font-size: 14px;
+}

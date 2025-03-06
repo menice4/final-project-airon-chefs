@@ -60,7 +60,7 @@ export default function Lobby() {
 
   // Function to generate a URL to invite users to the room
   const handleGenerateInvite = () => {
-    const inviteURL = `${window.location.origin}/quiz-lobby`;
+    const inviteURL = `${window.location.origin}`;
     navigator.clipboard.writeText(inviteURL);
     alert("Invite link copied to clipboard");
   };
