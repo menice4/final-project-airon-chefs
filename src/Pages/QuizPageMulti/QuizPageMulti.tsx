@@ -4,6 +4,9 @@ import QuizAnswer from "../../Components/Quiz/QuizAnswer/QuizAnswer";
 import Clock from "../../Components/Clock/Clock";
 import { useSocket } from "../../Context/SocketContext";
 
+// import the scoreboard
+import Scoreboard from "../../Components/ScoreBoard/ScoreBoard";
+
 type Question = {
   question: string;
   correct_answer: string;
@@ -83,13 +86,26 @@ export default function QuizPageMulti() {
   };
 
   const handleAnswerClick = (questionIndex: number, answer: string) => {
+    // prevents selecting an answer if one is already selected
     if (selectedAnswers[questionIndex] !== undefined) {
       return;
     }
+    // update local state with selected answer
     setSelectedAnswers((prev) => ({ ...prev, [questionIndex]: answer }));
-    if (answer === questions[questionIndex].correct_answer) {
+
+    // checks if answer is correct
+    const isCorrect = answer === questions[questionIndex].correct_answer;
+
+    // update local score
+    if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
     }
+
+    // and emit the answer to the server
+    socket?.emit("submit-answer", {
+      isCorrect,
+      questionIndex,
+    });
   };
 
   const handleTimerComplete = () => {
@@ -143,6 +159,13 @@ export default function QuizPageMulti() {
             </li>
           ))}
         </ul>
+      </div>
+
+      {currentQuestionIndex === questions.length - 1 && (
+        <Link to="/end">Finish</Link>
+      )}
+      <div className="scoreboard-wrapper">
+        <Scoreboard />
       </div>
     </div>
   );
