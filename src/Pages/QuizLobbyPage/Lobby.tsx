@@ -25,21 +25,30 @@ export default function Lobby() {
   useEffect(() => {
     if (!socket) return;
 
+    console.log("Lobby: Setting up navigate-to-quiz listener");
+
     // Listen for updates to the user list
     socket.on("update-users", (users: User[]) => {
       setUsers(users);
     });
 
     // Listens for the start game event
-    socket.on("start-game", () => {
-      navigate("/game");
+    /*  socket.on("game-starting", () => {
+      navigate("/quiz-multi");
+    }); */
+
+    // Listen only for navigation instruction
+    socket.on("navigate-to-quiz", () => {
+      console.log("Lobby: navigate-to-quiz event received");
+      navigate("/quiz-multi");
     });
 
     // Clean up the listener when the component unmounts
     return () => {
       socket.off("users");
+      socket.off("navigate-to-quiz");
     };
-  }, [socket]);
+  }, [socket, navigate]);
 
   // function to allow users to rename
   const handleRename = () => {
@@ -54,6 +63,13 @@ export default function Lobby() {
     const inviteURL = `${window.location.origin}/quiz-lobby`;
     navigator.clipboard.writeText(inviteURL);
     alert("Invite link copied to clipboard");
+  };
+
+  // start the game
+  const handleStartGame = () => {
+    if (socket) {
+      socket.emit("start-game");
+    }
   };
 
   return (
@@ -75,6 +91,7 @@ export default function Lobby() {
         <div>
           <div className="lobby-container">
             <button onClick={handleGenerateInvite}>Generate Invite URL</button>
+            <button onClick={handleStartGame}>Start Game</button>
           </div>
           <h2>Current Users</h2>
           <ul>

@@ -13,7 +13,6 @@ const HOST = `0.0.0.0`;
 
 app.use(
   cors({
-
     origin: [
       "https://final-project-quiz-mania.vercel.app",
       "http://localhost:5173",
@@ -46,9 +45,10 @@ const users = {};
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-
-    origin: ["http://localhost:5173",
-    "https://final-project-quiz-mania.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://final-project-quiz-mania.vercel.app",
+    ],
 
     methods: ["GET", "POST"],
     credentials: true,
@@ -79,6 +79,46 @@ io.on("connection", (socket) => {
       io.emit("update-users", Object.values(users));
     }
   });
+
+  // Listen for the start game event
+  // Makes a request to the API for questions
+  // Sends the questions to all clients
+  socket.on("start-game", async () => {
+    console.log("Start game event received");
+    try {
+      const response = await fetch(
+        "https://opentdb.com/api.php?amount=10&type=multiple"
+      );
+      const data = await response.json();
+
+      const questions = data.results.map((question) => ({
+        ...question,
+        shuffledAnswers: shuffleArray([
+          question.correct_answer,
+          ...question.incorrect_answers,
+        ]),
+      }));
+
+      // Log number of questions
+      console.log("Number of Questions:", questions.length);
+
+      // send notification to navigate to quiz page
+      io.emit("navigate-to-quiz");
+
+      // send questions data in a separate event
+      setTimeout(() => {
+        io.emit("quiz-questions", questions);
+        console.log("emitted quiz-questions event");
+      }, 500); // small delay to ensure navigation happens first
+    } catch (error) {
+      console.error("Error fetching quiz data:", error);
+    }
+  });
+
+  // Shuffle the answers for the questions
+  function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
 
   // HANDLE USERS DISCONNECTING
   socket.on("disconnect", () => {
