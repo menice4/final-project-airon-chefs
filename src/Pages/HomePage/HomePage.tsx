@@ -21,7 +21,9 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      <h1><QuizmaniaLogo/></h1>
+      <h1>
+        <QuizmaniaLogo />
+      </h1>
       <p>Choose a mode to get started:</p>
 
       <div className="button-group">
@@ -35,9 +37,6 @@ const HomePage = () => {
           👥 Multiplayer
         </button>
       </div>
-      <button onClick={() => navigate("/quiz-test")} className="btn quiz-test">
-          Dev test
-        </button>
 
       <button onClick={handleSignOut} className="btn signout">
         Sign Out
