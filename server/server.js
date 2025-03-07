@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
     console.log("Start game event received");
     try {
       const response = await fetch(
-        "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=multiple"
+        "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple"
       );
       const data = await response.json();
 
