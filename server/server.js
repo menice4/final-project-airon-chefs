@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
     console.log("Start game event received");
     try {
       const response = await fetch(
-        "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
+        "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=multiple"
       );
       const data = await response.json();
 
@@ -136,6 +136,27 @@ io.on("connection", (socket) => {
       // Create and broadcast scoreboard
       broadcastScoreboard();
     }
+  });
+
+  // Listen for requests for final scores
+  socket.on("request-final-scores", () => {
+    console.log("Final scores requested by:", socket.id);
+    broadcastScoreboard();
+  });
+
+  // handler for resetting scores
+  socket.on("reset-scores", () => {
+    console.log("resetting scores for all users");
+
+    // reset all user scores to 0
+    Object.keys(users).forEach((userId) => {
+      if (users[userId]) {
+        users[userId].score = 0;
+      }
+    });
+
+    // broadcast updated scoreboard
+    broadcastScoreboard();
   });
 
   // Helper function to broadcast updated scoreboard to all clients

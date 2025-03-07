@@ -43,6 +43,23 @@ function EndPage() {
     setConfetti(newConfetti);
   }, []);
 
+  // Load the final scores from localStorage on component mount
+  useEffect(() => {
+    const savedScores = localStorage.getItem("finalScoreboard");
+    if (savedScores) {
+      try {
+        const parsedScores = JSON.parse(savedScores);
+        console.log("Loaded final scores from localStorage:", parsedScores);
+        setFinalScores(parsedScores);
+        if (parsedScores.length > 0) {
+          setWinner(parsedScores[0]);
+        }
+      } catch (e) {
+        console.error("Error parsing saved scores:", e);
+      }
+    }
+  }, []);
+
   // Get winner from scoreboard updates and save final scores
   useEffect(() => {
     if (socket) {
@@ -59,6 +76,9 @@ function EndPage() {
 
       socket.on("scoreboard-update", handleScoreboardUpdate);
 
+      // Request final scores when component mounts
+      socket.emit("request-final-scores");
+
       return () => {
         socket.off("scoreboard-update", handleScoreboardUpdate);
       };
@@ -67,6 +87,8 @@ function EndPage() {
 
   // Function to handle returning to home and resetting scores
   const handleReturnHome = () => {
+    // Clear the saved scoreboard from localStorage
+    localStorage.removeItem("finalScoreboard");
     // Emit a custom event to reset scores
     if (socket) {
       socket.emit("reset-scores");
