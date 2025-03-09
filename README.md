@@ -1,6 +1,6 @@
 ### Quizmania
 
-A multiplayer web based quiz website where you can compete on your own or with your friends by answering questions and getting points/
+A multiplayer web based quiz website where you can compete on your own or with your friends by answering questions and scoring points.
 
 **Live Demo:** [Quizmania](https://final-project-quiz-mania.vercel.app/)
 
@@ -8,14 +8,14 @@ A multiplayer web based quiz website where you can compete on your own or with y
 
 ## Table of Contents
 
-- [Problem Statement](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
-- [Solution](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
-- [Tech Stack](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
-- [Setup & Installation](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
-- [Features](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
-- [Challenges & Learnings](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
-- [Future Improvements](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
-- [Contributors](https://www.notion.so/1acac7bab6af8057bedbc79dac2e8c18?pvs=21)
+- [Problem Statement](#problem-statement)
+- [Solution](#solution)
+- [Tech Stack](#tech-stack)
+- [Setup & Installation](#setup--installation)
+- [Features](#features)
+- [Challenges & Learnings](#challenges--learnings)
+- [Future Improvements](#future-improvements)
+- [Contributors](#contributors)
 
 ---
 
