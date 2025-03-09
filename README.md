@@ -110,12 +110,12 @@ As a team, we faced challenges with CSS styling, navigating WebSockets, and impl
 
 | Name | Role | GitHub |
 | --- | --- | --- |
-| Ashton | Front End | --- |
+| Ashton Bailey| Front End | [Menice4](https://github.com/menice4)  |
 | Carmen | Testing | [CarmenZak](https://github.com/CarmenZak?tab=repositories) |
-| Jacob | Front End | --- |
-| Jermaine | Security | --- |
-| Sergio | Backend & Web Sockets | --- |
-| Tim | DevOps | --- |
+| Jacob Smith| Front End | [SmithyJ98] (https://github.com/SmithyJ98) |
+| Jermaine | Security | [Jackafella1] (https://github.com/Jackafella1) |
+| Sergio | Backend & Web Sockets | [skudz96] (https://github.com/skudz96) |
+| Tim Li| DevOps | [Timothy-Li] (https://github.com/Timothy-Li) |
 
 ---
 
