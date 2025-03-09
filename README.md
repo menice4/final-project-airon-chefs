@@ -109,12 +109,13 @@ As a team, we faced challenges with CSS styling, navigating WebSockets, and impl
 ## 👥 Contributors
 
 | Name | Role | GitHub |
+| --- | --- | --- |
 | Ashton | Front End | --- |
 | Carmen | Testing | [CarmenZak](https://github.com/CarmenZak?tab=repositories) |
-| Jacob | Front End |  |
-| Jermaine | Security |  |
-| Sergio | Backend & Web Sockets  |  |
-| Tim | DevOps |  |
+| Jacob | Front End | --- |
+| Jermaine | Security | --- |
+| Sergio | Backend & Web Sockets | --- |
+| Tim | DevOps | --- |
 
 ---
 
