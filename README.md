@@ -4,6 +4,8 @@ A multiplayer web based quiz website where you can compete on your own or with y
 
 **Live Demo:** [Quizmania](https://final-project-quiz-mania.vercel.app/)
 
+[Presentation](https://www.canva.com/design/DAGg8ePcqfM/COb8yGx-KY-7cO6LUPVLTw/view?utm_content=DAGg8ePcqfM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h1f01586af9)
+
 ---
 
 ## Table of Contents
