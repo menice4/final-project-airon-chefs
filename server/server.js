@@ -9,7 +9,7 @@ const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const HOST =  `0.0.0.0`
+//const HOST =  `0.0.0.0`
 //`0.0.0.0`;
 
 app.use(
