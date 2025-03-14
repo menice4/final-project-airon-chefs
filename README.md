@@ -2,7 +2,7 @@
 
 A multiplayer web based quiz website where you can compete on your own or with your friends by answering questions and scoring points.
 
-**Live Demo:** [Quizmania](https://final-project-quiz-mania.vercel.app/)
+**Live Demo:** [Quizmania](https://quizzmania.vercel.app/)
 
 [Presentation](https://www.canva.com/design/DAGg8ePcqfM/COb8yGx-KY-7cO6LUPVLTw/view?utm_content=DAGg8ePcqfM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h1f01586af9)
 
@@ -10,14 +10,15 @@ A multiplayer web based quiz website where you can compete on your own or with y
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Problem Statement](#problem-statement)
 - [Solution](#solution)
 - [Tech Stack](#tech-stack)
-- [Setup & Installation](#setup--installation)
+- [Setup \& Installation](#setup--installation)
 - [Features](#features)
-- [Challenges & Learnings](#challenges--learnings)
+- [Challenges \& Learnings](#challenges--learnings)
 - [Future Improvements](#future-improvements)
-- [Contributors](#contributors)
+- [👥 Contributors](#-contributors)
 
 ---
 

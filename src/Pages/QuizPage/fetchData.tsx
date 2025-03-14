@@ -58,7 +58,7 @@ export default async function fetchData(): Promise<Question[]> {
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
     const response = await fetch(
-      "https://quiz-mania-ug0x.onrender.com/api/questions",
+      "https://quizathon-back-end.onrender.com",
       {
         signal: controller.signal,
       }

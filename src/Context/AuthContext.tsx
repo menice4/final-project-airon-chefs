@@ -52,9 +52,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Google Sign-In
   const googleSignIn = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
+    const redirectUrl = process.env.NODE_ENV === "production"
+      ? "https://quizzmania.vercel.app/home"
+      : "http://localhost:5173/home"; // Local dev URL
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: redirectUrl },
+      });
+
     return { error: error?.message };
   };
 
