@@ -50,7 +50,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
     origin: [
-      "https://final-project-quiz-mania.vercel.app"
+      "https://final-project-airon-chefs.onrender.com"
     ],
 
     methods: ["GET", "POST"],
